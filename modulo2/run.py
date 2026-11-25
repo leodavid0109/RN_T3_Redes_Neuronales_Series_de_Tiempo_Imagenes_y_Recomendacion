@@ -1,10 +1,12 @@
 """Punto de entrada único del Módulo 2.
 
-Uso:
-  python run.py inventario
-  python run.py duplicados
-  python run.py particion [--set particion.umbral_coseno=0.93]
-  python run.py datos            # los tres pasos anteriores en orden
+Uso (en Windows, `py` en lugar de `python`):
+  py run.py inventario
+  py run.py duplicados
+  py run.py particion [--set particion.umbral_coseno=0.80]
+  py run.py preproceso
+  py run.py datos            # inventario + duplicados + particion + preproceso
+  py run.py baseline         # modelo de referencia (logística sobre red congelada)
 
 Opciones comunes:
   --config configs/m2.yaml       archivo de configuración
@@ -13,6 +15,7 @@ Opciones comunes:
 from __future__ import annotations
 
 import argparse
+import importlib
 import json
 import sys
 import time
@@ -22,10 +25,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from m2.utils import entorno, load_config, resolve, set_seed  # noqa: E402
 
+PASOS = ["inventario", "duplicados", "particion", "preproceso", "baseline"]
+COMPUESTOS = {"datos": ["inventario", "duplicados", "particion", "preproceso"]}
+
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Módulo 2: conducción distractiva")
-    ap.add_argument("paso", choices=["inventario", "duplicados", "particion", "datos"])
+    ap.add_argument("paso", choices=PASOS + list(COMPUESTOS))
     ap.add_argument("--config", default="configs/m2.yaml")
     ap.add_argument("--set", action="append", default=[], metavar="CLAVE=VALOR")
     args = ap.parse_args(argv)
@@ -34,22 +40,10 @@ def main(argv=None):
     set_seed(cfg["seed"])
     print(f"Entorno: {json.dumps(entorno())}")
 
-    pasos = ["inventario", "duplicados", "particion"] if args.paso == "datos" else [args.paso]
-    for paso in pasos:
+    for paso in COMPUESTOS.get(args.paso, [args.paso]):
         t0 = time.time()
         print(f"\n=== {paso} ===")
-        if paso == "inventario":
-            from m2 import inventario
-
-            inventario.ejecutar(cfg)
-        elif paso == "duplicados":
-            from m2 import duplicados
-
-            duplicados.ejecutar(cfg)
-        elif paso == "particion":
-            from m2 import particion
-
-            particion.ejecutar(cfg)
+        importlib.import_module(f"m2.{paso}").ejecutar(cfg)
         print(f"[{paso}] {time.time() - t0:.1f} s")
 
     # Deja la configuración efectiva junto a los resultados, para reproducibilidad

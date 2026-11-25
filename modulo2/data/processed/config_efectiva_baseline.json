@@ -1,0 +1,102 @@
+{
+  "config": {
+    "seed": 42,
+    "dispositivo": "auto",
+    "num_workers": 4,
+    "datos": {
+      "raw_dir": "C:/datos/m2_raw",
+      "processed_dir": "data/processed",
+      "state_farm_lista": "C:/datos/driver_imgs_list.csv",
+      "alias_clases": {
+        "safe": "conduccion_segura",
+        "turn": "giro",
+        "text": "escribir_telefono",
+        "talk": "hablar_telefono",
+        "other": "otros"
+      }
+    },
+    "duplicados": {
+      "backbone": "resnet18",
+      "img_size": 224,
+      "batch_size": 64,
+      "registro_coseno": 0.6,
+      "muestra_nula": 200000,
+      "franjas_calibracion": [
+        [
+          0.6,
+          0.65
+        ],
+        [
+          0.65,
+          0.7
+        ],
+        [
+          0.7,
+          0.75
+        ],
+        [
+          0.75,
+          0.8
+        ],
+        [
+          0.8,
+          0.85
+        ],
+        [
+          0.85,
+          0.9
+        ],
+        [
+          0.9,
+          1.01
+        ]
+      ]
+    },
+    "particion": {
+      "umbral_coseno": 0.75,
+      "sesion_gap_min": 10,
+      "proporcion_validacion": 0.15,
+      "proporcion_prueba": 0.15,
+      "n_intentos": 2000,
+      "max_fraccion_grupo": 0.45
+    },
+    "preproceso": {
+      "tamano": 224,
+      "geometria": "estirar",
+      "calidad_jpeg": 90,
+      "carpeta": "imagenes"
+    },
+    "baseline": {
+      "backbone": "efficientnet_b0",
+      "batch_size": 64,
+      "valores_C": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "max_iter": 3000,
+      "bootstrap": 1000
+    },
+    "salidas": {
+      "figuras": "figuras",
+      "resultados": "resultados",
+      "modelos": "models"
+    }
+  },
+  "entorno": {
+    "numpy": "2.5.3",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060"
+  },
+  "overrides": []
+}

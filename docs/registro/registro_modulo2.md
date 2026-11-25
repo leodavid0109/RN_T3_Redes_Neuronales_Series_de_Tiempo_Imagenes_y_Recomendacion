@@ -17,8 +17,9 @@ Este registro documenta, en orden cronológico, las decisiones tomadas en el Mó
 | Origen de los 10 archivos dañados (¿.zip o descompresión?) | Hecho: ya venían en ceros en el .zip publicado | Sección 6.5 |
 | Detección de duplicados (primera corrida) | Hecha; el umbral de coseno del diseño no servía (H2-5) y el pHash no es confiable | Sección 7 |
 | Procedencia de las imágenes | **Confirmado:** 6.629 imágenes (91,1 %) son de State Farm (26 conductores); «giro» es en su mayoría *reaching behind* | Secciones 8 y 9 |
-| Calibración del umbral y partición | Diseñada y verificada con las características reales (por conductor + sesión + coseno centrado ≥ 0,75); falta confirmarla en la máquina de la sección 1 | Sección 10, `splits.csv`, `verificacion_fuga.json` |
-| Modelo de referencia (logística sobre características congeladas) | [pendiente] | |
+| Calibración del umbral y partición | **Hecha y confirmada** (por conductor + sesión + coseno centrado ≥ 0,75; 5.076 / 1.067 / 1.133; 0 fugas) | Sección 10, `splits.csv`, `verificacion_fuga.json` |
+| Preprocesamiento | Código listo y probado con datos sintéticos; falta correrlo | Sección 11 |
+| Modelo de referencia (logística sobre características congeladas) | Código listo y probado con datos sintéticos; falta correrlo | Sección 11 |
 | CNN desde cero | [pendiente] | |
 | Transfer learning | [pendiente] | |
 | 30 semillas, Grad-CAM, política de alertas | [pendiente] | |
@@ -335,12 +336,36 @@ Verificación independiente: 0 grupos, 0 MD5 y 0 imágenes con un par ≥ 0,75 c
 - La prueba de otras procedencias es una sola sesión de 2024 (136 fotos): mide la generalización a esa sesión, con poca precisión estadística.
 - En validación, de otras procedencias, hay solo 2 imágenes de «escribir en el teléfono».
 - Con 4 conductores de State Farm en prueba, las métricas dependen de qué conductores tocaron. Las 30 semillas no capturan esta variabilidad, porque la partición es fija.
-- **[pendiente]** Los resultados de esta tabla son de la corrida de verificación hecha en la sesión con las características reales. Se deben confirmar con la ejecución en la máquina de la sección 1 (`duplicados` + `particion`).
+**Confirmación en la máquina de la sección 1 (2026-11-25).** Se borró el `pares_candidatos.csv` antiguo y se corrieron `py run.py duplicados` (105,6 s: 91 s de embeddings en la GPU; 189.815 pares registrados con coseno ≥ 0,60; `pares_candidatos.csv.gz`) y `py run.py particion` (6,8 s). Los resultados coinciden **exactamente** con la corrida de verificación: los mismos conductores por partición, los mismos conteos, las mismas proporciones y la misma verificación (0 fugas; máximos 0,734 / 0,626 / 0,566). La distribución nula y los percentiles del vecino más cercano también coinciden con los de la sección 7 (nula: 0,0196 / 0,554 / 0,821; vecino más cercano: 0,734 / 0,894 / 0,972).
+
+Pares registrados por franja de coseno centrado: [0,60–0,65) 63.803 · [0,65–0,70) 41.988 · [0,70–0,75) 27.935 · [0,75–0,80) 21.483 · [0,80–0,85) 16.054 · [0,85–0,90) 10.222 · [0,90–1,00] 8.330.
+
+La Persona B revisó las figuras M2-5 y M2-7 sin observaciones, e hizo los commits de la etapa de datos (2026-11-25).
+
+### 11. Preprocesamiento y modelo de referencia: diseño
+
+**Preprocesamiento** (`py run.py preproceso`, `src/m2/preproceso.py`): una sola versión de las imágenes para todos los modelos, guardada en `data/processed/imagenes/` (JPEG, calidad 90) con la misma estructura de carpetas que el conjunto. La columna `ruta_proc` se agrega a `splits.csv`.
+- **Tamaño 224 × 224**, el de entrada de las redes preentrenadas en ImageNet.
+- **Geometría: estirar** (redimensionar sin conservar la proporción). Las proporciones originales son 4:3 horizontal (State Farm), 3:4 vertical (fotos de celular) y 16:9 (PNG). Alternativas consideradas:
+  - recortar al centro: pierde los bordes, donde en State Farm suelen quedar las manos y el teléfono;
+  - rellenar con franjas: las franjas delatan la proporción, y por tanto el origen.
+  Estirar no pierde contenido, y la deformación distinta por origen es un riesgo bajo porque el origen casi no informa la clase (6.3: 0,238 frente a 0,231 al azar). Las tres opciones quedan en `preproceso.geometria` para un análisis de sensibilidad.
+- Tamaño en disco: **[pendiente]**. Decide si las imágenes procesadas se versionan completas o solo un subconjunto (sección 5).
+
+**Modelo de referencia** (`py run.py baseline`, `src/m2/baseline.py`):
+- **Red congelada: EfficientNet-B0** preentrenada en ImageNet (pesos por defecto de torchvision), la misma que se ajustará en transfer learning. Justificación: es liviana (unos 5,3 millones de parámetros), adecuada para el cómputo embarcado de la sección «caso de uso», y permite comparar «misma red, congelada frente a ajustada».
+- Características: salida de 1.280 dimensiones de la penúltima capa, extraída una sola vez y sin aumento de datos. Estandarizadas con la media y la desviación del entrenamiento.
+- Regresión logística multinomial (scikit-learn, `lbfgs`, máx. 3.000 iteraciones). **Presupuesto de búsqueda: 11 valores de C** (de 10⁻⁴ a 10, en escala logarítmica), elegidos por F1 macro en validación. El modelo final se ajusta solo con entrenamiento, como las redes, que usan validación para la parada temprana.
+- Parámetros entrenables: 1.280 × 5 + 5 = 6.405.
+- **Variabilidad:** el modelo es determinista; se reportan 1.000 remuestras *bootstrap* del conjunto de prueba (semilla 42), para compararlas en la misma figura con las 30 semillas de las redes. Es una aproximación declarada: el bootstrap mide la incertidumbre del conjunto de prueba, mientras que las semillas miden la variabilidad del entrenamiento.
+- Salidas: `models/baseline_logreg.joblib`, `resultados/baseline_*.csv|json` y Fig. M2-8.
+- Prueba del código con datos sintéticos (230 imágenes, red sin pesos): el flujo completo corre (preproceso → características → búsqueda → métricas → bootstrap → figura). Las métricas de esa prueba no tienen significado.
+
+Resultados reales: **[pendiente]**.
 
 ### Próximos pasos
 
 1. Verificar con A y C que todo el equipo usa Python 3.14 y PyTorch 2.11.0, como se acordó en el día 0.
-2. Ejecutar en la máquina de la sección 1: borrar el `pares_candidatos.csv` antiguo, correr `py run.py duplicados` y `py run.py particion`, y confirmar la tabla de la sección 10.
-3. Revisar a ojo la Fig. M2-5 (franjas de 0,70 a 0,80) y la Fig. M2-7.
-4. Informar a A, C y al profesor sobre la procedencia del conjunto.
-5. Preprocesamiento y modelo de referencia.
+2. Informar a A, C y al profesor sobre la procedencia del conjunto.
+3. Correr `py run.py preproceso` y `py run.py baseline`, y registrar los resultados.
+4. CNN desde cero y transfer learning.

@@ -10,4 +10,5 @@ Todas las figuras se regeneran con `py run.py datos` desde `modulo2/`. Fuente de
 | Fig. M2-4 | `figM2-4_distribucion_similitud.png` | Coseno centrado con el vecino más cercano frente a pares aleatorios (distribución nula) | Elaboración propia |
 | Fig. M2-5 | `figM2-5_calibracion_duplicados.png` | Pares de imágenes por franja de coseno centrado, usados para calibrar el umbral | Elaboración propia con imágenes de Afridi et al. (2024) |
 | Fig. M2-6 | `figM2-6_particion_por_clase.png` | Imágenes por clase, partición y procedencia | Elaboración propia |
+| Fig. M2-8 | `figM2-8_busqueda_baseline.png` | Modelo de referencia: F1 macro en validación según la regularización C | Elaboración propia |
 | Fig. M2-7 | `figM2-7_verificacion_fuga.png` | Coseno centrado máximo entre particiones frente al umbral de agrupación | Elaboración propia |

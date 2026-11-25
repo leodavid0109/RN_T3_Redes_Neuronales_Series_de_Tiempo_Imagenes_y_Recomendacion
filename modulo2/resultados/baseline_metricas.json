@@ -1,0 +1,191 @@
+{
+  "modelo": "Regresión logística multinomial sobre características congeladas",
+  "backbone": "efficientnet_b0",
+  "pesos": "EfficientNet_B0_Weights.IMAGENET1K_V1",
+  "dimension_caracteristicas": 1280,
+  "parametros_entrenables": 6405,
+  "presupuesto_busqueda": {
+    "configuraciones": 11,
+    "criterio": "F1 macro en validación"
+  },
+  "mejor_C": 0.03,
+  "tiempo_s": {
+    "extraccion": 33.3,
+    "busqueda": 26.0
+  },
+  "validacion": {
+    "n": 1067,
+    "exactitud": 0.5801,
+    "f1_macro": 0.5713,
+    "por_clase": {
+      "conduccion_segura": {
+        "precision": 0.5959,
+        "sensibilidad": 0.7953,
+        "f1": 0.6813,
+        "n": 254
+      },
+      "giro": {
+        "precision": 0.8837,
+        "sensibilidad": 0.6096,
+        "f1": 0.7215,
+        "n": 187
+      },
+      "escribir_telefono": {
+        "precision": 0.681,
+        "sensibilidad": 0.3527,
+        "f1": 0.4647,
+        "n": 224
+      },
+      "hablar_telefono": {
+        "precision": 0.5387,
+        "sensibilidad": 0.6293,
+        "f1": 0.5805,
+        "n": 232
+      },
+      "otros": {
+        "precision": 0.3679,
+        "sensibilidad": 0.4588,
+        "f1": 0.4084,
+        "n": 170
+      }
+    },
+    "matriz_confusion": [
+      [
+        202,
+        3,
+        18,
+        15,
+        16
+      ],
+      [
+        15,
+        114,
+        6,
+        15,
+        37
+      ],
+      [
+        56,
+        1,
+        79,
+        46,
+        42
+      ],
+      [
+        44,
+        3,
+        0,
+        146,
+        39
+      ],
+      [
+        22,
+        8,
+        13,
+        49,
+        78
+      ]
+    ]
+  },
+  "prueba": {
+    "n": 1133,
+    "exactitud": 0.7052,
+    "f1_macro": 0.6977,
+    "por_clase": {
+      "conduccion_segura": {
+        "precision": 0.8138,
+        "sensibilidad": 0.8252,
+        "f1": 0.8194,
+        "n": 286
+      },
+      "giro": {
+        "precision": 0.722,
+        "sensibilidad": 0.7594,
+        "f1": 0.7402,
+        "n": 212
+      },
+      "escribir_telefono": {
+        "precision": 0.8497,
+        "sensibilidad": 0.5532,
+        "f1": 0.6701,
+        "n": 235
+      },
+      "hablar_telefono": {
+        "precision": 0.756,
+        "sensibilidad": 0.7281,
+        "f1": 0.7418,
+        "n": 217
+      },
+      "otros": {
+        "precision": 0.4419,
+        "sensibilidad": 0.623,
+        "f1": 0.517,
+        "n": 183
+      }
+    },
+    "matriz_confusion": [
+      [
+        236,
+        11,
+        9,
+        10,
+        20
+      ],
+      [
+        7,
+        161,
+        3,
+        10,
+        31
+      ],
+      [
+        15,
+        39,
+        130,
+        7,
+        44
+      ],
+      [
+        7,
+        1,
+        2,
+        158,
+        49
+      ],
+      [
+        25,
+        11,
+        9,
+        24,
+        114
+      ]
+    ]
+  },
+  "prueba_por_procedencia": {
+    "otra": {
+      "n": 136,
+      "exactitud": 0.3015,
+      "f1_macro": 0.237
+    },
+    "state_farm": {
+      "n": 997,
+      "exactitud": 0.7603,
+      "f1_macro": 0.7468
+    }
+  },
+  "prueba_bootstrap": {
+    "remuestras": 1000,
+    "f1_macro": {
+      "mean": 0.6968,
+      "std": 0.013,
+      "min": 0.6526,
+      "max": 0.7445
+    },
+    "exactitud": {
+      "mean": 0.7048,
+      "std": 0.0132,
+      "min": 0.6567,
+      "max": 0.7502
+    }
+  }
+}

@@ -49,5 +49,20 @@ particion:
   # de 232 de 647 imágenes (36 %), que queda entero en entrenamiento (registro, 10).
   max_fraccion_grupo: 0.45
 
+preproceso:
+  tamano: 224               # lado de la imagen guardada (px)
+  geometria: estirar        # estirar | recortar | rellenar (registro, sección 11)
+  calidad_jpeg: 90
+  carpeta: imagenes         # dentro de data/processed/
+
+baseline:
+  backbone: efficientnet_b0 # misma red que se ajustará en transfer learning
+  batch_size: 64
+  valores_C: [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0]
+  max_iter: 3000
+  bootstrap: 1000           # remuestras del conjunto de prueba para la variabilidad
+
 salidas:
   figuras: figuras
+  resultados: resultados
+  modelos: models
