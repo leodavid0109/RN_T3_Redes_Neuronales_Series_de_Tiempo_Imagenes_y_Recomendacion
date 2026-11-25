@@ -1,0 +1,75 @@
+{
+  "config": {
+    "seed": 42,
+    "dispositivo": "auto",
+    "num_workers": 4,
+    "datos": {
+      "raw_dir": "C:/datos/m2_raw",
+      "processed_dir": "data/processed",
+      "alias_clases": {
+        "safe": "conduccion_segura",
+        "turn": "giro",
+        "text": "escribir_telefono",
+        "talk": "hablar_telefono",
+        "other": "otros"
+      }
+    },
+    "duplicados": {
+      "backbone": "resnet18",
+      "img_size": 224,
+      "batch_size": 64,
+      "registro_coseno": 0.85,
+      "registro_hamming": 12,
+      "franjas_calibracion": [
+        [
+          0.85,
+          0.88
+        ],
+        [
+          0.88,
+          0.9
+        ],
+        [
+          0.9,
+          0.92
+        ],
+        [
+          0.92,
+          0.94
+        ],
+        [
+          0.94,
+          0.96
+        ],
+        [
+          0.96,
+          0.98
+        ],
+        [
+          0.98,
+          1.01
+        ]
+      ]
+    },
+    "particion": {
+      "umbral_coseno": 0.94,
+      "umbral_hamming": 6,
+      "n_pliegues": 20,
+      "proporcion_validacion": 0.15,
+      "proporcion_prueba": 0.15
+    },
+    "salidas": {
+      "figuras": "figuras"
+    }
+  },
+  "entorno": {
+    "numpy": "2.5.3",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060"
+  },
+  "overrides": [
+    "datos.raw_dir=C:/datos/m2_raw"
+  ]
+}

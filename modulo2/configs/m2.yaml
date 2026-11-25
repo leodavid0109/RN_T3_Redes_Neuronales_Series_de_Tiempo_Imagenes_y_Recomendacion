@@ -1,0 +1,53 @@
+# Configuración del Módulo 2 (clasificación de conducción distractiva).
+# Cualquier valor se puede cambiar sin editar este archivo:
+#   py run.py particion --set particion.umbral_coseno=0.80
+# Rutas relativas = relativas a la carpeta modulo2/.
+
+seed: 42            # semilla global (las 30 corridas usan 0..29)
+dispositivo: auto   # auto | cuda | cpu
+num_workers: 4      # hilos de carga de imágenes (0 si hay problemas en Windows)
+
+datos:
+  # Carpeta donde se descomprimió el conjunto (contiene las 5 carpetas de clase).
+  # Ruta FUERA de OneDrive y del repositorio.
+  raw_dir: C:/datos/m2_raw
+  processed_dir: data/processed
+  # Lista de State Farm (Kaggle) con el conductor de cada imagen: registro, sección 9.
+  # No se versiona en el repositorio (reglas de la competencia).
+  state_farm_lista: C:/datos/driver_imgs_list.csv
+  # Fragmento del nombre de carpeta -> clase canónica (se busca sin distinguir mayúsculas)
+  alias_clases:
+    safe: conduccion_segura
+    turn: giro
+    text: escribir_telefono
+    talk: hablar_telefono
+    other: otros
+
+duplicados:
+  backbone: resnet18          # red preentrenada (ImageNet) para los embeddings
+  img_size: 224
+  batch_size: 64
+  # Se guardan los pares con coseno CENTRADO >= este valor (no decide nada todavía)
+  registro_coseno: 0.60
+  # Pares aleatorios para la distribución nula (referencia del umbral)
+  muestra_nula: 200000
+  # Franjas de coseno centrado que se muestran en la figura de calibración
+  franjas_calibracion: [[0.60, 0.65], [0.65, 0.70], [0.70, 0.75], [0.75, 0.80], [0.80, 0.85], [0.85, 0.90], [0.90, 1.01]]
+
+particion:
+  # Coseno centrado a partir del cual dos imágenes se consideran de la misma
+  # persona o sesión y van al mismo grupo (registro, sección 10).
+  umbral_coseno: 0.75
+  # Imágenes sin conductor conocido: fotos del mismo origen tomadas con menos de
+  # estos minutos entre una y la siguiente forman una misma sesión (mismo grupo).
+  sesion_gap_min: 10
+  proporcion_validacion: 0.15
+  proporcion_prueba: 0.15
+  n_intentos: 2000            # órdenes aleatorios de grupos evaluados para equilibrar la partición
+  # Protección: ningún grupo puede reunir más de esta fracción de su procedencia.
+  # 0.45 porque en las fotos de 2024 dos sesiones se unen por similitud en un grupo
+  # de 232 de 647 imágenes (36 %), que queda entero en entrenamiento (registro, 10).
+  max_fraccion_grupo: 0.45
+
+salidas:
+  figuras: figuras

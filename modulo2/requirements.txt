@@ -1,0 +1,17 @@
+# Dependencias del Módulo 2 (el requirements.txt raíz las incluye con -r modulo2/requirements.txt)
+#
+# PyTorch NO se instala desde aquí: la versión con CUDA depende de la GPU.
+# La RTX 5060 (arquitectura Blackwell) necesita una build con CUDA 12.8 o superior.
+# Instalar primero, con el índice de CUDA 12.8:
+#   pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
+# Versiones verificadas en Windows, Python 3.14, RTX 5060:
+#   torch==2.11.0+cu128
+#   torchvision==0.26.0+cu128
+numpy==2.5.3
+pandas==3.0.5
+pillow==12.3.0
+ImageHash==4.3.2
+scikit-learn==1.9.1
+matplotlib==3.11.2
+PyYAML==6.0.3
+tqdm==4.70.1

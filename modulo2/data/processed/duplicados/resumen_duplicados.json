@@ -1,0 +1,38 @@
+{
+  "backbone": "resnet18",
+  "pesos": "ResNet18_Weights.IMAGENET1K_V1",
+  "minimo_caracteristica_sin_centrar": 0.0,
+  "distribucion_nula": {
+    "n_pares": 199968,
+    "coseno_centrado_percentiles": {
+      "1": -0.2337,
+      "5": -0.1677,
+      "50": 0.0196,
+      "95": 0.3369,
+      "99": 0.554,
+      "99.9": 0.8206
+    },
+    "hamming_percentiles": {
+      "0.1": 4.0,
+      "1": 10.0,
+      "5": 14.0,
+      "50": 24.0
+    }
+  },
+  "vecino_mas_cercano_percentiles": {
+    "5": 0.7343,
+    "50": 0.8945,
+    "95": 0.972
+  },
+  "pares_por_franja": {
+    "[0.6, 0.65)": 63803,
+    "[0.65, 0.7)": 41988,
+    "[0.7, 0.75)": 27935,
+    "[0.75, 0.8)": 21483,
+    "[0.8, 0.85)": 16054,
+    "[0.85, 0.9)": 10222,
+    "[0.9, 1.01)": 8330
+  },
+  "pares_registrados": 189815,
+  "tiempo_s": 104.7
+}

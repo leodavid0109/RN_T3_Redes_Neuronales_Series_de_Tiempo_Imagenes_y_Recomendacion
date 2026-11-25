@@ -1,0 +1,11 @@
+ruta,en_zip,bytes_en_zip,crc_ok,solo_ceros_en_zip,cabecera_en_zip
+Multi-Class Driver Behavior Image Dataset/other_activities/img_13318.jpg,True,41375,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/other_activities/img_13396.jpg,True,43719,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/other_activities/img_13541.jpg,True,39889,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/other_activities/img_13625.jpg,True,41815,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/other_activities/img_20398.jpg,True,40099,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/other_activities/img_22266.jpg,True,43061,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/turning/img_101434.jpg,True,49581,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/turning/img_62337.jpg,True,51288,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/turning/img_67523.jpg,True,45275,True,True,0000000000000000
+Multi-Class Driver Behavior Image Dataset/turning/img_70552.jpg,True,40563,True,True,0000000000000000

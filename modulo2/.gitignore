@@ -1,0 +1,10 @@
+# Imágenes crudas (.zip de ~2,56 GB): se descargan de Mendeley Data, no se versionan
+data/raw/
+# Intermedios regenerables desde los datos crudos
+data/processed/duplicados/caracteristicas.npz
+# Versión antigua de los pares (sin centrar, ~900 MB): no debe subirse nunca
+data/processed/duplicados/pares_candidatos.csv
+# Lista de conductores de State Farm (Kaggle): no se redistribuye
+driver_imgs_list.csv
+__pycache__/
+*.pyc

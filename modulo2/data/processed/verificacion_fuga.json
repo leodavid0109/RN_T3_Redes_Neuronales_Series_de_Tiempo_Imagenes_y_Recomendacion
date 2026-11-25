@@ -1,0 +1,113 @@
+{
+  "umbral_coseno_centrado": 0.75,
+  "grupos": 34,
+  "grupos_por_procedencia": {
+    "otra": 8,
+    "state_farm": 26
+  },
+  "tamano_grupo_maximo": 384,
+  "conductores_state_farm_por_particion": {
+    "entrenamiento": 17,
+    "validacion": 5,
+    "prueba": 4
+  },
+  "conductores_state_farm": {
+    "entrenamiento": [
+      "p002",
+      "p014",
+      "p015",
+      "p016",
+      "p021",
+      "p022",
+      "p024",
+      "p026",
+      "p035",
+      "p045",
+      "p047",
+      "p049",
+      "p050",
+      "p052",
+      "p056",
+      "p061",
+      "p081"
+    ],
+    "validacion": [
+      "p041",
+      "p042",
+      "p064",
+      "p066",
+      "p072"
+    ],
+    "prueba": [
+      "p012",
+      "p039",
+      "p051",
+      "p075"
+    ]
+  },
+  "imagenes_por_particion": {
+    "entrenamiento": 5076,
+    "validacion": 1067,
+    "prueba": 1133
+  },
+  "imagenes_por_particion_y_procedencia": {
+    "entrenamiento": {
+      "otra": 443,
+      "state_farm": 4633
+    },
+    "validacion": {
+      "otra": 68,
+      "state_farm": 999
+    },
+    "prueba": {
+      "otra": 136,
+      "state_farm": 997
+    }
+  },
+  "proporcion_clase_por_particion": {
+    "entrenamiento": {
+      "conduccion_segura": 0.2244,
+      "giro": 0.1852,
+      "escribir_telefono": 0.2171,
+      "hablar_telefono": 0.2096,
+      "otros": 0.1637
+    },
+    "validacion": {
+      "conduccion_segura": 0.2381,
+      "giro": 0.1753,
+      "escribir_telefono": 0.2099,
+      "hablar_telefono": 0.2174,
+      "otros": 0.1593
+    },
+    "prueba": {
+      "conduccion_segura": 0.2524,
+      "giro": 0.1871,
+      "escribir_telefono": 0.2074,
+      "hablar_telefono": 0.1915,
+      "otros": 0.1615
+    }
+  },
+  "verificacion": {
+    "validacion->entrenamiento": {
+      "coseno_centrado_maximo": 0.734,
+      "coseno_centrado_p99": 0.6738,
+      "imagenes_con_par_sobre_umbral": 0,
+      "grupos_compartidos": 0,
+      "md5_compartidos": 0
+    },
+    "prueba->entrenamiento": {
+      "coseno_centrado_maximo": 0.6259,
+      "coseno_centrado_p99": 0.5939,
+      "imagenes_con_par_sobre_umbral": 0,
+      "grupos_compartidos": 0,
+      "md5_compartidos": 0
+    },
+    "prueba->validacion": {
+      "coseno_centrado_maximo": 0.5662,
+      "coseno_centrado_p99": 0.5159,
+      "imagenes_con_par_sobre_umbral": 0,
+      "grupos_compartidos": 0,
+      "md5_compartidos": 0
+    }
+  }
+}

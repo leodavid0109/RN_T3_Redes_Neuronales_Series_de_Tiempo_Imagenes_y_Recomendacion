@@ -1,0 +1,112 @@
+{
+  "total_imagenes": 7276,
+  "imagenes_por_clase": {
+    "conduccion_segura": 1679,
+    "giro": 1339,
+    "escribir_telefono": 1561,
+    "hablar_telefono": 1513,
+    "otros": 1184
+  },
+  "proporcion_por_clase": {
+    "conduccion_segura": 0.2308,
+    "giro": 0.184,
+    "escribir_telefono": 0.2145,
+    "hablar_telefono": 0.2079,
+    "otros": 0.1627
+  },
+  "razon_desbalance_max_min": 1.418,
+  "resoluciones": {
+    "640x480": 6629,
+    "3072x4096": 262,
+    "683x384": 183,
+    "2460x3280": 136,
+    "3024x4032": 32,
+    "720x1280": 8,
+    "576x720": 1,
+    "611x964": 1,
+    "622x888": 1,
+    "622x931": 1,
+    "614x952": 1,
+    "616x900": 1,
+    "618x918": 1,
+    "619x894": 1,
+    "621x794": 1,
+    "622x783": 1,
+    "625x824": 1,
+    "625x820": 1,
+    "624x867": 1,
+    "624x818": 1,
+    "623x856": 1,
+    "623x842": 1,
+    "628x916": 1,
+    "629x863": 1,
+    "2371x3310": 1,
+    "1200x1200": 1,
+    "953x1280": 1,
+    "2395x2938": 1,
+    "2519x2738": 1,
+    "2462x2939": 1,
+    "2565x3707": 1,
+    "3120x4160": 1
+  },
+  "imagenes_con_rotacion_exif": 113,
+  "origen_por_clase": {
+    "captura_pantalla": {
+      "conduccion_segura": 11,
+      "giro": 1,
+      "escribir_telefono": 0,
+      "hablar_telefono": 0,
+      "otros": 5
+    },
+    "foto_IMG_N": {
+      "conduccion_segura": 9,
+      "giro": 6,
+      "escribir_telefono": 0,
+      "hablar_telefono": 5,
+      "otros": 12
+    },
+    "foto_IMG_fecha_HDR": {
+      "conduccion_segura": 96,
+      "giro": 84,
+      "escribir_telefono": 42,
+      "hablar_telefono": 50,
+      "otros": 132
+    },
+    "img_640x480": {
+      "conduccion_segura": 1531,
+      "giro": 1187,
+      "escribir_telefono": 1505,
+      "hablar_telefono": 1434,
+      "otros": 972
+    },
+    "photo_fecha": {
+      "conduccion_segura": 8,
+      "giro": 0,
+      "escribir_telefono": 0,
+      "hablar_telefono": 0,
+      "otros": 3
+    },
+    "png_683x384": {
+      "conduccion_segura": 24,
+      "giro": 61,
+      "escribir_telefono": 14,
+      "hablar_telefono": 24,
+      "otros": 60
+    }
+  },
+  "duplicados_exactos_md5": {
+    "archivos_en_grupos_repetidos": 0,
+    "grupos_repetidos": 0
+  },
+  "imagenes_sin_clase": 0,
+  "archivos_ilegibles": {
+    "total": 10,
+    "por_clase": {
+      "otros": 6,
+      "giro": 4
+    },
+    "por_formato_real": {
+      "solo ceros": 10
+    }
+  }
+}
