@@ -12,6 +12,7 @@ Cada hallazgo sigue los seis campos del enunciado: (1) prompt literal, (2) respu
 | H2-4 | 2026-11-25 | Datos del mundo real (características del conjunto) | Tamaño del .zip «corregido» por confusión de unidades GB/GiB | Baja |
 | H2-5 | 2026-11-25 | Código / Conceptos | Umbral de coseno sobre características no negativas: la mitad de los pares «parecidos» | Alta: habría unido el conjunto en un solo grupo, o guardado 900 MB de pares inútiles |
 | H2-6 | 2026-11-25 | Código / Conceptos | Umbral de pHash (Hamming ≤ 6) tomado como estándar, sin medirlo en estos datos | Media: decenas de miles de falsos duplicados, muchos entre clases distintas |
+| H2-9 | 2026-11-25 | Código | Claves del espacio de búsqueda con «.», imposibles de cambiar con `--set` | Baja: incumplía «parámetros modificables desde la CLI» para la búsqueda |
 | H2-8 | 2026-11-25 | Código (fuga de información) | Agrupar las fotos de 2024 solo por similitud dejaba a la misma persona en dos particiones | Media: se detectó antes de entrenar |
 | H2-7 | 2026-11-25 | Datos del mundo real (características del conjunto) | «Giro es una maniobra legítima, sin alerta», sin verificar qué contiene la clase | Alta: la política de alertas no alertaría el 89 % de esa clase, que es una distracción |
 
@@ -169,6 +170,22 @@ La IA tomó como cierta la descripción del artículo («7.286 imágenes JPEG»)
 
 ---
 
+## H2-9. Claves con punto en el espacio de búsqueda
+
+**1. Prompt.** «listo el commit» (el usuario autorizó seguir con el código de las redes).
+
+**2. Respuesta de la IA (parte relevante).** En `configs/m2.yaml`, el espacio de búsqueda usaba claves como `cnn.bloques` y `transfer.bloques_descongelados`, que `redes.py` separaba por «.».
+
+**3. Sospecha.** Al probar la búsqueda con `--set busqueda.espacio.cnn.cnn.filtros_base=[8]`, el programa falló con `KeyError: np.int64(0)`.
+
+**4. Evidencia.** `--set` usa el «.» para navegar el YAML, así que `busqueda.espacio.cnn.cnn.filtros_base` crea `espacio → cnn → cnn → filtros_base` (un diccionario anidado) en lugar de cambiar la clave `"cnn.filtros_base"`. Además, el espacio queda con un diccionario donde se esperaba una lista. Esas claves no se podían cambiar desde la línea de comandos, como exige el enunciado.
+
+**5. Corrección.** Las claves anidadas del espacio se escriben con «/» (`cnn/bloques`), y `_set` traduce «/» a «.». Con eso, `--set busqueda.espacio.cnn.cnn/filtros_base=[8]` funciona.
+
+**6. Lección.** Cuando dos mecanismos usan el mismo separador (claves del YAML y rutas de la CLI), hay que probar los cambios desde la CLI sobre cada tipo de parámetro, no solo los de primer nivel.
+
+---
+
 ## Hipótesis de la IA descartadas (no son hallazgos, porque se plantearon como hipótesis)
 
 | Fecha | Hipótesis | Resultado |
@@ -180,3 +197,4 @@ La IA tomó como cierta la descripción del artículo («7.286 imágenes JPEG»)
 | Fecha | Error | Corrección |
 |---|---|---|
 | 2026-11-25 | La IA dijo que escribiría el código de los modelos mientras se descargaban los datos y no lo hizo; el usuario no fue informado hasta más tarde. | Se informó explícitamente y se reprogramó para después de preparar los datos. |
+| 2026-11-25 | Al probar la congelación del transfer learning, el script de prueba de la IA tomó la instantánea de los pesos después de que el entrenamiento recargara la mejor época. La prueba indicó, falsamente, que los bloques descongelados no cambiaban en la etapa 2. | Se detectó al razonar el orden de las llamadas; con la instantánea correcta la prueba confirma el comportamiento esperado. El código no se modificó, porque no tenía el error. |

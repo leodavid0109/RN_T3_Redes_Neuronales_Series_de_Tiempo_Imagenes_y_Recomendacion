@@ -62,6 +62,72 @@ baseline:
   max_iter: 3000
   bootstrap: 1000           # remuestras del conjunto de prueba para la variabilidad
 
+# Intensidades de aumento de datos (se aplican solo al entrenamiento, en línea).
+# El volteo horizontal no cambia la etiqueta porque las clases de State Farm
+# «derecha» e «izquierda» están unidas; se prueba solo en la intensidad fuerte.
+aumentos:
+  leve: &aum_leve {rotacion: 5, brillo_contraste: 0.10, recorte_escala_min: 0.90, volteo_h: 0.0}
+  medio: &aum_medio {rotacion: 10, brillo_contraste: 0.25, recorte_escala_min: 0.75, volteo_h: 0.0}
+  fuerte: &aum_fuerte {rotacion: 15, brillo_contraste: 0.40, recorte_escala_min: 0.60, volteo_h: 0.5}
+
+# Configuración de una red (la usa `entrenar`; `busqueda` parte de aquí y cambia
+# lo definido en su espacio; `semillas` usa la mejor configuración de la búsqueda).
+red:
+  familia: transfer          # cnn | transfer
+  epocas_max: 30
+  paciencia: 6               # épocas sin mejorar el F1 macro de validación
+  batch_size: 64
+  optimizador: adamw         # adamw | sgd
+  lr: 0.001
+  momento: 0.9               # solo SGD (con Nesterov)
+  weight_decay: 0.01
+  dropout: 0.3
+  precision_mixta: true      # bfloat16 en la GPU
+  aumento: *aum_medio
+  cnn:
+    bloques: 5
+    filtros_base: 32
+  transfer:
+    epocas_cabeza: 2         # épocas iniciales entrenando solo la cabeza
+    bloques_descongelados: 4 # últimos bloques de EfficientNet-B0 que se ajustan (0-9)
+    factor_lr_base: 0.1      # lr de la base = lr * factor
+
+busqueda:
+  semilla: 42
+  presupuesto: 16            # configuraciones por familia (presupuesto explícito)
+  epocas_max: 12
+  paciencia: 4
+  espacio:
+    cnn:
+      _optimizacion:
+        - {optimizador: adamw, lr: 0.0003}
+        - {optimizador: adamw, lr: 0.001}
+        - {optimizador: adamw, lr: 0.003}
+        - {optimizador: sgd, lr: 0.01}
+        - {optimizador: sgd, lr: 0.03}
+      weight_decay: [0.0001, 0.001, 0.01, 0.05]
+      dropout: [0.2, 0.4, 0.5]
+      cnn/bloques: [4, 5]
+      cnn/filtros_base: [16, 32]
+      aumento: [*aum_leve, *aum_medio, *aum_fuerte]
+    transfer:
+      _optimizacion:
+        - {optimizador: adamw, lr: 0.0003}
+        - {optimizador: adamw, lr: 0.001}
+        - {optimizador: adamw, lr: 0.003}
+        - {optimizador: sgd, lr: 0.01}
+        - {optimizador: sgd, lr: 0.03}
+      weight_decay: [0.0001, 0.01, 0.05]
+      dropout: [0.2, 0.4]
+      transfer/bloques_descongelados: [0, 2, 4, 9]
+      transfer/factor_lr_base: [0.05, 0.1, 0.3]
+      aumento: [*aum_leve, *aum_medio, *aum_fuerte]
+
+semillas:
+  inicio: 0
+  n: 30
+  verbose: false
+
 salidas:
   figuras: figuras
   resultados: resultados

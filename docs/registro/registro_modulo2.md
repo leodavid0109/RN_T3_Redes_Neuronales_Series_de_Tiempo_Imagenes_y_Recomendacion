@@ -18,10 +18,10 @@ Este registro documenta, en orden cronológico, las decisiones tomadas en el Mó
 | Detección de duplicados (primera corrida) | Hecha; el umbral de coseno del diseño no servía (H2-5) y el pHash no es confiable | Sección 7 |
 | Procedencia de las imágenes | **Confirmado:** 6.629 imágenes (91,1 %) son de State Farm (26 conductores); «giro» es en su mayoría *reaching behind* | Secciones 8 y 9 |
 | Calibración del umbral y partición | **Hecha y confirmada** (por conductor + sesión + coseno centrado ≥ 0,75; 5.076 / 1.067 / 1.133; 0 fugas) | Sección 10, `splits.csv`, `verificacion_fuga.json` |
-| Preprocesamiento | Código listo y probado con datos sintéticos; falta correrlo | Sección 11 |
-| Modelo de referencia (logística sobre características congeladas) | Código listo y probado con datos sintéticos; falta correrlo | Sección 11 |
-| CNN desde cero | [pendiente] | |
-| Transfer learning | [pendiente] | |
+| Preprocesamiento | Hecho: 224 px, estirado, 121,4 MB | Secciones 11 y 12 |
+| Modelo de referencia (logística sobre características congeladas) | Hecho: F1 macro en prueba 0,698 (State Farm 0,747; fotos de 2024 0,237) | Sección 12 |
+| CNN desde cero | Código listo y probado; falta la búsqueda | Sección 13 |
+| Transfer learning | Código listo y probado (incluida la congelación en dos etapas); falta la búsqueda | Sección 13 |
 | 30 semillas, Grad-CAM, política de alertas | [pendiente] | |
 
 ---
@@ -350,7 +350,7 @@ La Persona B revisó las figuras M2-5 y M2-7 sin observaciones, e hizo los commi
   - recortar al centro: pierde los bordes, donde en State Farm suelen quedar las manos y el teléfono;
   - rellenar con franjas: las franjas delatan la proporción, y por tanto el origen.
   Estirar no pierde contenido, y la deformación distinta por origen es un riesgo bajo porque el origen casi no informa la clase (6.3: 0,238 frente a 0,231 al azar). Las tres opciones quedan en `preproceso.geometria` para un análisis de sensibilidad.
-- Tamaño en disco: **[pendiente]**. Decide si las imágenes procesadas se versionan completas o solo un subconjunto (sección 5).
+- Tamaño en disco: 121,4 MB; se versionan completas (sección 12).
 
 **Modelo de referencia** (`py run.py baseline`, `src/m2/baseline.py`):
 - **Red congelada: EfficientNet-B0** preentrenada en ImageNet (pesos por defecto de torchvision), la misma que se ajustará en transfer learning. Justificación: es liviana (unos 5,3 millones de parámetros), adecuada para el cómputo embarcado de la sección «caso de uso», y permite comparar «misma red, congelada frente a ajustada».
@@ -361,11 +361,71 @@ La Persona B revisó las figuras M2-5 y M2-7 sin observaciones, e hizo los commi
 - Salidas: `models/baseline_logreg.joblib`, `resultados/baseline_*.csv|json` y Fig. M2-8.
 - Prueba del código con datos sintéticos (230 imágenes, red sin pesos): el flujo completo corre (preproceso → características → búsqueda → métricas → bootstrap → figura). Las métricas de esa prueba no tienen significado.
 
-Resultados reales: **[pendiente]**.
+### 12. Resultados del preprocesamiento y del modelo de referencia (2026-11-25)
+
+**Preprocesamiento** (`py run.py preproceso`): 7.276 imágenes en 106 s; **121,4 MB** en total (unos 17 KB por imagen). Ningún archivo se acerca al límite de 100 MB por archivo de GitHub, así que las imágenes procesadas **se versionan completas**: cumplen el requisito de que la ejecución no dependa de los datos crudos ni de internet.
+
+**Modelo de referencia** (`py run.py baseline`; 95 s en total: 33 s de extracción en la GPU y 26 s de búsqueda; pesos `efficientnet_b0_rwightman-7f5810bc`):
+
+| C | 0,0001 | 0,0003 | 0,001 | 0,003 | 0,01 | **0,03** | 0,1 | 0,3 | 1 | 3 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| F1 macro (validación) | 0,542 | 0,556 | 0,564 | 0,560 | 0,559 | **0,571** | 0,568 | 0,559 | 0,562 | 0,555 | 0,537 |
+
+La curva es casi plana (0,54–0,57): la regularización influye poco. Con el C elegido (0,03), la exactitud en entrenamiento es 1,00: el modelo memoriza el entrenamiento.
+
+| Conjunto | Exactitud | F1 macro |
+|---|---|---|
+| Validación | 0,580 | 0,571 |
+| **Prueba** | **0,705** | **0,698** |
+| Prueba, State Farm (997) | 0,760 | 0,747 |
+| Prueba, fotos de 2024 (136) | 0,301 | 0,237 |
+| Prueba, bootstrap de 1.000 remuestras: media ± desviación (mín.–máx.) | 0,705 ± 0,013 (0,657–0,750) | 0,697 ± 0,013 (0,653–0,745) |
+
+Por clase, en prueba (precisión / sensibilidad): conducción segura 0,81 / 0,83 · giro 0,72 / 0,76 · escribir 0,85 / 0,55 · hablar 0,76 / 0,73 · otros 0,44 / 0,62. Los errores más frecuentes: escribir confundido con otros (44) y con giro (39); hablar confundido con otros (49).
+
+**Análisis** (a partir de `resultados/baseline_predicciones.csv` y de `splits.csv`):
+1. **La variabilidad entre conductores domina.** Exactitud por conductor: en prueba, p012 0,76 · p039 0,79 · p051 0,90 · p075 0,57; en validación, p041 0,55 · p042 0,89 · p064 0,59 · p066 0,49 · p072 0,54. La diferencia entre validación (0,58) y prueba (0,71) se explica porque en validación quedaron conductores más difíciles. Consecuencias:
+   - el bootstrap por imagen (desviación 0,013) **subestima** la incertidumbre, porque las imágenes de un mismo conductor no son independientes. **[pendiente]** Agregar un bootstrap por conductor o grupo;
+   - las 30 semillas de las redes tampoco capturan esta variabilidad, porque la partición es fija. Se declara como limitación.
+2. **Generalización a fotos reales: muy baja.** En la sesión de 2024 de prueba, la exactitud es 0,30, cerca del azar (0,20 con 5 clases), y el modelo **nunca predice «conducción segura»** (0 de 28). En validación (dos sesiones de 2024) la exactitud es 0,25. Las características de ImageNet con una capa lineal entrenada sobre el 91 % de State Farm no se trasladan a fotos de celular en buses de Bangladesh. Es evidencia directa para la pregunta de negocio 2.
+3. La clase «otros» (radio, beber, peinarse o maquillarse, hablar con el pasajero) tiene la precisión más baja (0,44): agrupa conductas heterogéneas y recibe errores de todas las demás. Esto confirma la hipótesis de dificultad.
+
+### 13. Redes neuronales: diseño del código
+
+Archivos: `src/m2/modelos.py`, `entrenamiento.py` y `redes.py`. Comandos: `py run.py entrenar | busqueda | semillas`, con `--set red.familia=cnn|transfer`.
+
+**Arquitecturas:**
+- **CNN desde cero** (`CNNDesdeCero`): b bloques [Conv 3×3 – BatchNorm – ReLU] × 2 + MaxPool 2×2; los filtros empiezan en `filtros_base` y se duplican en cada bloque. Con 5 bloques, la entrada de 224 × 224 queda en un mapa de 7 × 7. Cabeza: *Global Average Pooling* → Dropout → Lineal(5). Inicialización de Kaiming (He) para las convoluciones.
+- **Transfer learning:** EfficientNet-B0 preentrenada (la misma red del modelo de referencia), con la cabeza cambiada por Dropout → Lineal(1.280 → 5). **Dos etapas:** durante `epocas_cabeza` épocas solo se entrena la cabeza; después se descongelan los últimos `bloques_descongelados` bloques de `features` (de 0 a 9), con tasa de aprendizaje `lr × factor_lr_base`. Los bloques congelados mantienen su BatchNorm en modo evaluación, para conservar las estadísticas de ImageNet.
+
+**Entrenamiento** (común a las dos familias):
+- Entropía cruzada.
+- AdamW (weight decay desacoplado) o SGD con momento de Nesterov.
+- Calentamiento lineal de 1 época y decaimiento coseno por paso.
+- Precisión mixta bfloat16 en la GPU.
+- Parada temprana por F1 macro en validación (`paciencia` épocas sin mejora), conservando los pesos de la mejor época.
+- Aumento de datos solo en entrenamiento y en línea, con tres intensidades (leve, medio, fuerte): recorte aleatorio con reescalado, rotación y brillo/contraste/saturación. El volteo horizontal se usa solo en la intensidad fuerte: no cambia la etiqueta, porque las clases «derecha» e «izquierda» de State Farm están unidas.
+- La semilla controla la inicialización, el orden de los lotes, el dropout y el aumento de datos; la partición es fija.
+
+**Búsqueda** (`py run.py busqueda`): búsqueda aleatoria con un **presupuesto fijo de 16 configuraciones por familia**, semilla 42, máximo 12 épocas y paciencia 4; criterio: F1 macro en validación. Justificación de la búsqueda aleatoria frente a la rejilla: con varios hiperparámetros de importancia desigual, explora más valores distintos de cada uno con el mismo presupuesto (Bergstra y Bengio, 2012). Espacio (`busqueda.espacio` en `configs/m2.yaml`):
+- CNN: optimizador y lr {AdamW 3·10⁻⁴, 10⁻³, 3·10⁻³; SGD 0,01, 0,03}; weight decay {10⁻⁴, 10⁻³, 0,01, 0,05}; dropout {0,2, 0,4, 0,5}; bloques {4, 5}; filtros base {16, 32}; aumento {leve, medio, fuerte}.
+- Transfer: los mismos optimizadores y lr; weight decay {10⁻⁴, 0,01, 0,05}; dropout {0,2, 0,4}; bloques descongelados {0, 2, 4, 9}; factor de lr de la base {0,05, 0,1, 0,3}; aumento {leve, medio, fuerte}.
+
+La búsqueda se puede interrumpir y reanudar sin repetir configuraciones. La mejor queda en `resultados/mejor_config_<familia>.yaml`, con `epocas_max` 30 y paciencia 6 para la corrida final.
+
+**30 semillas** (`py run.py semillas`): la mejor configuración con las semillas 0 a 29. También se reanuda. El modelo de la **semilla 0** se guarda como modelo final (`models/<familia>_final.pt`); se eligió de antemano, no por su resultado, para no favorecer una semilla afortunada. Se guardan las probabilidades en prueba de las 30 semillas (`prob_prueba_<familia>.npz`).
+
+**`py run.py entrenar`:** una corrida con la configuración `red` del YAML más los cambios de la CLI, por ejemplo `--set red.lr=0.003`. Es la que se usa para la modificación en vivo de la sustentación.
+
+**Pruebas del código** (datos sintéticos, CPU):
+- Las dos familias entrenan, evalúan y guardan resultados.
+- La búsqueda y las semillas se reanudan sin repetir trabajo.
+- Prueba de la congelación en dos etapas, comparando el `state_dict` antes y después de cada época: en la etapa 1 solo cambia la cabeza (bloques 0–8 y sus estadísticas de BatchNorm intactos); en la etapa 2 cambian los bloques 7–8 descongelados y la cabeza, y los bloques 0–6 siguen intactos.
+- Se corrigió un problema de diseño: las claves del espacio de búsqueda con «.» no se podían cambiar con `--set` (hallazgo **H2-9**). Ahora se escriben con «/» (p. ej. `cnn/bloques`).
 
 ### Próximos pasos
 
 1. Verificar con A y C que todo el equipo usa Python 3.14 y PyTorch 2.11.0, como se acordó en el día 0.
 2. Informar a A, C y al profesor sobre la procedencia del conjunto.
-3. Correr `py run.py preproceso` y `py run.py baseline`, y registrar los resultados.
-4. CNN desde cero y transfer learning.
+3. Medir el tiempo por época de cada familia y lanzar las búsquedas.
+4. Bootstrap por conductor o grupo para todos los modelos.

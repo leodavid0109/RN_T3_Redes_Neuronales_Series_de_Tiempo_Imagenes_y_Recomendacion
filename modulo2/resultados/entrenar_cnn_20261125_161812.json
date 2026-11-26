@@ -1,0 +1,119 @@
+{
+  "config": {
+    "familia": "cnn",
+    "epocas_max": 2,
+    "paciencia": 6,
+    "batch_size": 64,
+    "optimizador": "adamw",
+    "lr": 0.001,
+    "momento": 0.9,
+    "weight_decay": 0.01,
+    "dropout": 0.3,
+    "precision_mixta": true,
+    "aumento": {
+      "rotacion": 10,
+      "brillo_contraste": 0.25,
+      "recorte_escala_min": 0.75,
+      "volteo_h": 0.0
+    },
+    "cnn": {
+      "bloques": 5,
+      "filtros_base": 32
+    },
+    "transfer": {
+      "epocas_cabeza": 2,
+      "bloques_descongelados": 4,
+      "factor_lr_base": 0.1
+    }
+  },
+  "semilla": 42,
+  "f1_macro_validacion": 0.6235,
+  "exactitud_validacion": 0.6579,
+  "f1_macro_prueba": 0.5471,
+  "exactitud_prueba": 0.6046,
+  "f1_prueba_otra": 0.0997,
+  "f1_prueba_state_farm": 0.5952,
+  "exactitud_prueba_otra": 0.2279,
+  "exactitud_prueba_state_farm": 0.656,
+  "mejor_epoca": 2,
+  "epocas_entrenadas": 2,
+  "tiempo_s": 42.9,
+  "parametros_entrenables": 4716773,
+  "parametros_totales": 4716773,
+  "prueba_por_clase": {
+    "conduccion_segura": {
+      "precision": 0.7873,
+      "sensibilidad": 0.6084,
+      "f1": 0.6864,
+      "n": 286
+    },
+    "giro": {
+      "precision": 0.5533,
+      "sensibilidad": 0.8821,
+      "f1": 0.68,
+      "n": 212
+    },
+    "escribir_telefono": {
+      "precision": 0.6031,
+      "sensibilidad": 0.6723,
+      "f1": 0.6358,
+      "n": 235
+    },
+    "hablar_telefono": {
+      "precision": 0.572,
+      "sensibilidad": 0.7143,
+      "f1": 0.6352,
+      "n": 217
+    },
+    "otros": {
+      "precision": 0.2683,
+      "sensibilidad": 0.0601,
+      "f1": 0.0982,
+      "n": 183
+    }
+  },
+  "matriz_confusion_prueba": [
+    [
+      174,
+      40,
+      22,
+      23,
+      27
+    ],
+    [
+      10,
+      187,
+      13,
+      2,
+      0
+    ],
+    [
+      2,
+      42,
+      158,
+      31,
+      2
+    ],
+    [
+      13,
+      21,
+      27,
+      155,
+      1
+    ],
+    [
+      22,
+      48,
+      42,
+      60,
+      11
+    ]
+  ],
+  "entorno": {
+    "numpy": "2.5.3",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060"
+  }
+}

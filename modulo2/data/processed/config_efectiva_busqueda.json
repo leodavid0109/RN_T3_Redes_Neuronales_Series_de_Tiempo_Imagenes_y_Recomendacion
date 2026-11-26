@@ -1,0 +1,291 @@
+{
+  "config": {
+    "seed": 42,
+    "dispositivo": "auto",
+    "num_workers": 4,
+    "datos": {
+      "raw_dir": "C:/datos/m2_raw",
+      "processed_dir": "data/processed",
+      "state_farm_lista": "C:/datos/driver_imgs_list.csv",
+      "alias_clases": {
+        "safe": "conduccion_segura",
+        "turn": "giro",
+        "text": "escribir_telefono",
+        "talk": "hablar_telefono",
+        "other": "otros"
+      }
+    },
+    "duplicados": {
+      "backbone": "resnet18",
+      "img_size": 224,
+      "batch_size": 64,
+      "registro_coseno": 0.6,
+      "muestra_nula": 200000,
+      "franjas_calibracion": [
+        [
+          0.6,
+          0.65
+        ],
+        [
+          0.65,
+          0.7
+        ],
+        [
+          0.7,
+          0.75
+        ],
+        [
+          0.75,
+          0.8
+        ],
+        [
+          0.8,
+          0.85
+        ],
+        [
+          0.85,
+          0.9
+        ],
+        [
+          0.9,
+          1.01
+        ]
+      ]
+    },
+    "particion": {
+      "umbral_coseno": 0.75,
+      "sesion_gap_min": 10,
+      "proporcion_validacion": 0.15,
+      "proporcion_prueba": 0.15,
+      "n_intentos": 2000,
+      "max_fraccion_grupo": 0.45
+    },
+    "preproceso": {
+      "tamano": 224,
+      "geometria": "estirar",
+      "calidad_jpeg": 90,
+      "carpeta": "imagenes"
+    },
+    "baseline": {
+      "backbone": "efficientnet_b0",
+      "batch_size": 64,
+      "valores_C": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "max_iter": 3000,
+      "bootstrap": 1000
+    },
+    "aumentos": {
+      "leve": {
+        "rotacion": 5,
+        "brillo_contraste": 0.1,
+        "recorte_escala_min": 0.9,
+        "volteo_h": 0.0
+      },
+      "medio": {
+        "rotacion": 10,
+        "brillo_contraste": 0.25,
+        "recorte_escala_min": 0.75,
+        "volteo_h": 0.0
+      },
+      "fuerte": {
+        "rotacion": 15,
+        "brillo_contraste": 0.4,
+        "recorte_escala_min": 0.6,
+        "volteo_h": 0.5
+      }
+    },
+    "red": {
+      "familia": "cnn",
+      "epocas_max": 30,
+      "paciencia": 6,
+      "batch_size": 64,
+      "optimizador": "adamw",
+      "lr": 0.001,
+      "momento": 0.9,
+      "weight_decay": 0.01,
+      "dropout": 0.3,
+      "precision_mixta": true,
+      "aumento": {
+        "rotacion": 10,
+        "brillo_contraste": 0.25,
+        "recorte_escala_min": 0.75,
+        "volteo_h": 0.0
+      },
+      "cnn": {
+        "bloques": 5,
+        "filtros_base": 32
+      },
+      "transfer": {
+        "epocas_cabeza": 2,
+        "bloques_descongelados": 4,
+        "factor_lr_base": 0.1
+      }
+    },
+    "busqueda": {
+      "semilla": 42,
+      "presupuesto": 16,
+      "epocas_max": 12,
+      "paciencia": 4,
+      "espacio": {
+        "cnn": {
+          "_optimizacion": [
+            {
+              "optimizador": "adamw",
+              "lr": 0.0003
+            },
+            {
+              "optimizador": "adamw",
+              "lr": 0.001
+            },
+            {
+              "optimizador": "adamw",
+              "lr": 0.003
+            },
+            {
+              "optimizador": "sgd",
+              "lr": 0.01
+            },
+            {
+              "optimizador": "sgd",
+              "lr": 0.03
+            }
+          ],
+          "weight_decay": [
+            0.0001,
+            0.001,
+            0.01,
+            0.05
+          ],
+          "dropout": [
+            0.2,
+            0.4,
+            0.5
+          ],
+          "cnn/bloques": [
+            4,
+            5
+          ],
+          "cnn/filtros_base": [
+            16,
+            32
+          ],
+          "aumento": [
+            {
+              "rotacion": 5,
+              "brillo_contraste": 0.1,
+              "recorte_escala_min": 0.9,
+              "volteo_h": 0.0
+            },
+            {
+              "rotacion": 10,
+              "brillo_contraste": 0.25,
+              "recorte_escala_min": 0.75,
+              "volteo_h": 0.0
+            },
+            {
+              "rotacion": 15,
+              "brillo_contraste": 0.4,
+              "recorte_escala_min": 0.6,
+              "volteo_h": 0.5
+            }
+          ]
+        },
+        "transfer": {
+          "_optimizacion": [
+            {
+              "optimizador": "adamw",
+              "lr": 0.0003
+            },
+            {
+              "optimizador": "adamw",
+              "lr": 0.001
+            },
+            {
+              "optimizador": "adamw",
+              "lr": 0.003
+            },
+            {
+              "optimizador": "sgd",
+              "lr": 0.01
+            },
+            {
+              "optimizador": "sgd",
+              "lr": 0.03
+            }
+          ],
+          "weight_decay": [
+            0.0001,
+            0.01,
+            0.05
+          ],
+          "dropout": [
+            0.2,
+            0.4
+          ],
+          "transfer/bloques_descongelados": [
+            0,
+            2,
+            4,
+            9
+          ],
+          "transfer/factor_lr_base": [
+            0.05,
+            0.1,
+            0.3
+          ],
+          "aumento": [
+            {
+              "rotacion": 5,
+              "brillo_contraste": 0.1,
+              "recorte_escala_min": 0.9,
+              "volteo_h": 0.0
+            },
+            {
+              "rotacion": 10,
+              "brillo_contraste": 0.25,
+              "recorte_escala_min": 0.75,
+              "volteo_h": 0.0
+            },
+            {
+              "rotacion": 15,
+              "brillo_contraste": 0.4,
+              "recorte_escala_min": 0.6,
+              "volteo_h": 0.5
+            }
+          ]
+        }
+      }
+    },
+    "semillas": {
+      "inicio": 0,
+      "n": 30,
+      "verbose": false
+    },
+    "salidas": {
+      "figuras": "figuras",
+      "resultados": "resultados",
+      "modelos": "models"
+    }
+  },
+  "entorno": {
+    "numpy": "2.5.3",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060"
+  },
+  "overrides": [
+    "red.familia=cnn"
+  ]
+}

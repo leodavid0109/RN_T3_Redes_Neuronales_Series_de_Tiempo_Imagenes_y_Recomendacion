@@ -34,6 +34,24 @@ def transformacion_evaluacion(tamano: int = 224):
     )
 
 
+def transformacion_entrenamiento(aumento: dict, tamano: int = 224):
+    """Aumento de datos aplicado solo al entrenamiento (en línea, en cada época)."""
+    pasos = []
+    if aumento.get("recorte_escala_min", 1.0) < 1.0:
+        pasos.append(transforms.RandomResizedCrop(tamano, scale=(aumento["recorte_escala_min"], 1.0), ratio=(0.9, 1.1)))
+    else:
+        pasos.append(transforms.Resize((tamano, tamano)))
+    if aumento.get("rotacion", 0) > 0:
+        pasos.append(transforms.RandomRotation(aumento["rotacion"]))
+    if aumento.get("brillo_contraste", 0) > 0:
+        b = aumento["brillo_contraste"]
+        pasos.append(transforms.ColorJitter(brightness=b, contrast=b, saturation=b / 2))
+    if aumento.get("volteo_h", 0) > 0:
+        pasos.append(transforms.RandomHorizontalFlip(aumento["volteo_h"]))
+    pasos += [transforms.ToTensor(), transforms.Normalize(MEDIA_IMAGENET, DESV_IMAGENET)]
+    return transforms.Compose(pasos)
+
+
 def cargar_splits(cfg: dict) -> pd.DataFrame:
     proc = resolve(cfg["datos"]["processed_dir"])
     df = pd.read_csv(proc / "splits.csv")
