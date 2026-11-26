@@ -20,9 +20,9 @@ Este registro documenta, en orden cronológico, las decisiones tomadas en el Mó
 | Calibración del umbral y partición | **Hecha y confirmada** (por conductor + sesión + coseno centrado ≥ 0,75; 5.076 / 1.067 / 1.133; 0 fugas) | Sección 10, `splits.csv`, `verificacion_fuga.json` |
 | Preprocesamiento | Hecho: 224 px, estirado, 121,4 MB | Secciones 11 y 12 |
 | Modelo de referencia (logística sobre características congeladas) | Hecho: F1 macro en prueba 0,698 (State Farm 0,747; fotos de 2024 0,237) | Sección 12 |
-| CNN desde cero | Código listo y probado; falta la búsqueda | Sección 13 |
-| Transfer learning | Código listo y probado (incluida la congelación en dos etapas); falta la búsqueda | Sección 13 |
-| 30 semillas, Grad-CAM, política de alertas | [pendiente] | |
+| CNN desde cero | Hecho: F1 prueba 0,656 ± 0,102 (30 semillas) | Sección 15 |
+| Transfer learning | **Hecho: F1 prueba 0,855 ± 0,021 (30 semillas); mejor modelo** | Sección 15 |
+| Grad-CAM, aciertos y errores, política de alertas | [pendiente] | |
 
 ---
 
@@ -423,9 +423,79 @@ La búsqueda se puede interrumpir y reanudar sin repetir configuraciones. La mej
 - Prueba de la congelación en dos etapas, comparando el `state_dict` antes y después de cada época: en la etapa 1 solo cambia la cabeza (bloques 0–8 y sus estadísticas de BatchNorm intactos); en la etapa 2 cambian los bloques 7–8 descongelados y la cabeza, y los bloques 0–6 siguen intactos.
 - Se corrigió un problema de diseño: las claves del espacio de búsqueda con «.» no se podían cambiar con `--set` (hallazgo **H2-9**). Ahora se escriben con «/» (p. ej. `cnn/bloques`).
 
+### 14. Costo de cómputo medido (2026-11-25)
+
+`py run.py entrenar --set red.familia=<familia> --set red.epocas_max=2` con la configuración `red` por defecto (AdamW, lr 10⁻³, aumento medio, lote de 64):
+
+| Familia | Época 1 | Época 2 | F1 macro val. (2 épocas) | F1 macro prueba | F1 prueba, fotos de 2024 | Parámetros entrenables |
+|---|---|---|---|---|---|---|
+| Transfer (EfficientNet-B0, 4 bloques; las 2 épocas solo entrenan la cabeza) | 29 s | 8 s | 0,377 | 0,485 | 0,191 | 3.705.293 de 4.013.953 |
+| CNN desde cero (5 bloques, 32 filtros base) | 31 s | 11 s | 0,624 | 0,547 | 0,100 | 4.716.773 |
+
+La primera época incluye el arranque de los procesos de carga y el calentamiento de la GPU (unos 20 s). Estimaciones:
+- búsqueda: unos 16 × (30 s + 11 × 12 s) ≈ 45 min por familia como máximo;
+- 30 semillas: hasta unas 3 h por familia con 30 épocas, menos con la parada temprana.
+Son corridas indicativas de 2 épocas, no resultados.
+
+### 15. Búsqueda de hiperparámetros y 30 semillas: resultados (2026-11-25)
+
+**Búsqueda** (`py run.py busqueda`; 16 configuraciones por familia; semilla 42; máx. 12 épocas; paciencia 4). Fig. M2-9 y `resultados/busqueda_<familia>.csv`.
+
+| | Transfer learning | CNN desde cero |
+|---|---|---|
+| Cómputo de la búsqueda | 31,8 min | 33,6 min |
+| F1 macro en validación: mejor / mediana / peor | **0,860** / 0,666 / 0,433 | **0,766** / 0,728 / 0,183 |
+| Configuración elegida | #5: AdamW, lr 0,003, weight decay 10⁻⁴, dropout 0,2, **4 bloques descongelados**, factor de lr de la base 0,3, aumento leve | #10: SGD con Nesterov, lr 0,03, weight decay 0,01, dropout 0,4, **5 bloques, 16 filtros base**, aumento leve |
+| Parámetros entrenables de la elegida | 3.705.293 de 4.013.953 (cabeza 6.405) | 1.181.045 |
+
+Patrones de la búsqueda:
+- **El aumento fuerte perjudica en ambas familias:** en la CNN, todas las configuraciones con aumento fuerte quedaron por debajo de 0,61, y en transfer, por debajo de 0,68. 6 de las 7 mejores configuraciones de la CNN (la excepción, la #4, usa aumento medio) y las 4 mejores de transfer usan aumento leve. Interpretación: en State Farm la cámara está fija, así que recortes del 60 % y rotaciones de 15° alejan las imágenes de entrenamiento de las de evaluación sin aportar una variación realista.
+- **Transfer con 0 bloques descongelados** (solo se entrena la cabeza, con aumento) obtuvo entre 0,43 y 0,57, el mismo nivel que el modelo de referencia (0,571). Lo que aporta el transfer learning es **ajustar los bloques de la base**, no la cabeza.
+
+**30 semillas** (`py run.py semillas`; semillas 0 a 29; máx. 30 épocas; paciencia 6; la partición es la misma en todas). Fig. M2-10 (curvas de la semilla 0), Fig. M2-11 (cajas), Fig. M2-12 (matriz de confusión de transfer, semilla 0) y `resultados/comparacion_modelos.csv`.
+
+| Modelo | Variabilidad | F1 macro prueba: media ± desv. (mín.–máx.) | F1 macro val. (media) | F1 prueba State Farm | F1 prueba fotos de 2024 | Parámetros entrenables | Búsqueda | 30 semillas |
+|---|---|---|---|---|---|---|---|---|
+| Referencia (logística sobre EfficientNet-B0 congelada) | bootstrap de prueba (1.000) | 0,697 ± 0,013 (0,653–0,745) | 0,571 | 0,747 | 0,237 | 6.405 | 11 config., 0,4 min | — |
+| CNN desde cero | 30 semillas | 0,656 ± 0,102 (0,419–0,813) | 0,690 | 0,703 | 0,138 | 1.181.045 | 16 config., 33,6 min | 65,8 min |
+| **Transfer learning (EfficientNet-B0)** | 30 semillas | **0,855 ± 0,021 (0,778–0,879)** | 0,829 | **0,913** | **0,387** | 3.705.293 | 16 config., 31,8 min | 70,5 min |
+
+Mediana de la mejor época: transfer 8,5; CNN 7. Correlación entre el F1 de validación y el de prueba a lo largo de las semillas: transfer 0,49; CNN 0,84.
+
+**Análisis:**
+1. **El transfer learning supera claramente a la referencia:** +0,16 de F1 macro en prueba. Incluso su peor semilla (0,778) supera la mejor remuestra del bootstrap de la referencia (0,745). Además es estable entre semillas (desviación 0,021). El costo es unas 580 veces más parámetros entrenables y unos 100 minutos de GPU entre búsqueda y semillas, frente a menos de un minuto de la referencia.
+2. **La CNN desde cero no supera a la referencia en promedio** (0,656 frente a 0,697) y es **muy inestable** (desviación 0,102; de 0,42 a 0,81). Varias semillas se detienen pronto (mejor época entre 2 y 5) con F1 bajo. Con SGD y lr 0,03, el F1 de validación oscila mucho de una época a otra (Fig. M2-10), y la parada temprana puede quedarse con un máximo temprano.
+3. **Optimismo de la búsqueda (*winner's curse*).** La configuración de la CNN se eligió con F1 de validación 0,766 en una sola semilla (42), pero la media de las 30 semillas con la misma configuración es 0,690. Elegir el máximo entre 16 configuraciones con una sola semilla favorece a las que tuvieron suerte. En transfer la diferencia es menor (0,860 frente a 0,829). Por eso la comparación se hace con las 30 semillas y no con el valor de la búsqueda.
+4. **Generalización a fotos reales:** todos los modelos caen con fuerza en la sesión de 2024 de prueba (136 fotos de celular en buses). Transfer llega a 0,387 de F1, por encima del azar (≈ 0,2) pero lejos de su 0,913 en State Farm. La CNN desde cero (0,138) queda incluso por debajo de la referencia (0,237): sin conocimiento previo de ImageNet aprende rasgos específicos de State Farm. Es evidencia directa para la pregunta de negocio 2.
+5. **Errores por clase** (transfer, semilla 0, Fig. M2-12): «otros» es el sumidero de errores. Recibe el 12 % de conducción segura, el 11 % de escribir y el 17 % de hablar, y tiene la menor precisión (0,55). Escribir y hablar casi no se confunden entre sí (≤ 1 %).
+
+**Limitación ya señalada (sección 12):** las 30 semillas miden la variabilidad del entrenamiento con la partición fija. No miden la variabilidad por la elección de conductores en prueba, que en la referencia va de 0,49 a 0,90 de exactitud por conductor. **[pendiente]** Bootstrap por conductor o grupo.
+
+**Revisión de las figuras:** al revisar la Fig. M2-9 se encontró que los dos paneles compartían el eje Y, y las etiquetas de la CNN mostraban las configuraciones de transfer. Se corrigió (hallazgo **H2-10**).
+
+### 16. Evaluación del modelo final: diseño (`py run.py evaluacion`, `src/m2/evaluacion.py`)
+
+Usa los modelos guardados (`models/<familia>_final.pt`, semilla 0), sin reentrenar. El modelo interpretado es **transfer learning** (`evaluacion.familia`).
+
+1. **Grad-CAM** (Selvaraju et al., 2017), implementado con *hooks* de PyTorch sobre la última capa convolucional: `features[8]` en EfficientNet-B0 y la salida del bloque 5 en la CNN, ambas de 7 × 7. Mapa: ReLU(Σₖ αₖᶜ Aᵏ), con αₖᶜ = media espacial de ∂yᶜ/∂Aᵏ, para la clase predicha; se interpola a 224 × 224 y se normaliza a [0, 1].
+   - **10 aciertos y 10 errores** de prueba (Figs. M2-13 y M2-14; listados en `resultados/gradcam_aciertos.csv` y `gradcam_errores.csv`). Selección con semilla 42: una imagen por clase real y el resto al azar; entre los errores se reservan hasta 3 fotos de 2024.
+   - **Grad-CAM promedio por clase** sobre los aciertos de State Farm en prueba (Fig. M2-15). Como la cámara de State Farm es fija, el promedio muestra en qué zonas de la escena se apoya el modelo para cada clase.
+2. **Política de alertas:**
+   - Puntaje = 1 − P(conducción segura); alerta si puntaje ≥ umbral. «Giro» dispara alerta (sección 10).
+   - Umbrales de 0,02 a 0,98 (paso 0,02).
+   - El umbral se **elige en validación**, minimizando el costo esperado = falsas alarmas + r × no detectadas por cada 1.000 imágenes, con cocientes de costo r ∈ {1, 5, 10, 20}. Se **reporta en prueba**.
+   - Dos prevalencias de distracción: la del conjunto de prueba (≈ 75 %, irreal) y una **supuesta del 10 %** para la operación (`alertas.prevalencia_supuesta`). Por cada 1.000 imágenes: falsas alarmas = 1.000 (1 − π) TFA; no detectadas = 1.000 π TND.
+   - Fig. M2-16 y `resultados/alertas_umbral_prueba.csv`.
+3. **Exactitud por grupo de prueba** (4 conductores de State Farm y la sesión de 2024) para la referencia, las 30 semillas de la CNN y las 30 de transfer (Fig. M2-17; `resultados/metricas_por_grupo_prueba.csv`). Muestra la variabilidad por conductor que las semillas no capturan. Reemplaza al bootstrap por conductor planeado en la sección 12: con solo 5 grupos en prueba, un bootstrap de grupos sería muy poco informativo.
+4. **Diagrama de arquitectura** (Fig. M2-18): capas, dimensiones de salida (pasada con una imagen de 224 × 224), tipo y activación, y parámetros por capa. Comprobación: EfficientNet-B0 suma 4.013.953 parámetros, y los bloques 5 a 8 descongelados suman 3.698.888, igual que en el entrenamiento (sección 15).
+
+**Pruebas** con datos sintéticos y modelos mínimos: el paso completo corre. Se corrigió un error: el *hook* de Grad-CAM quedaba registrado y fallaba en una pasada posterior sin gradientes; ahora solo actúa con gradientes y se retira al terminar.
+
+Resultados reales: **[pendiente]**.
+
 ### Próximos pasos
 
 1. Verificar con A y C que todo el equipo usa Python 3.14 y PyTorch 2.11.0, como se acordó en el día 0.
 2. Informar a A, C y al profesor sobre la procedencia del conjunto.
-3. Medir el tiempo por época de cada familia y lanzar las búsquedas.
-4. Bootstrap por conductor o grupo para todos los modelos.
+3. Correr `py run.py evaluacion`, revisar los Grad-CAM y explicar los 10 errores.
+4. `api.py`, página de la app y modo demo.

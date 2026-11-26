@@ -1,0 +1,11 @@
+ruta,ruta_proc,clase,prediccion,confianza,procedencia,grupo
+Multi-Class Driver Behavior Image Dataset/texting_phone/IMG_20240930_133134060_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/texting_phone/IMG_20240930_133134060_HDR_AE.jpg,escribir_telefono,otros,0.7911,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/other_activities/IMG_20240930_132652107_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/other_activities/IMG_20240930_132652107_HDR_AE.jpg,otros,conduccion_segura,0.9531,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/turning/IMG_20240930_132811591_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/turning/IMG_20240930_132811591_HDR_AE.jpg,giro,conduccion_segura,0.8733,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/safe_driving/img_63802.jpg,Multi-Class Driver Behavior Image Dataset/safe_driving/img_63802.jpg,conduccion_segura,otros,0.9306,state_farm,sf_p051
+Multi-Class Driver Behavior Image Dataset/turning/IMG_20240930_132723338_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/turning/IMG_20240930_132723338_HDR_AE.jpg,giro,otros,0.4749,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/texting_phone/img_34316.jpg,Multi-Class Driver Behavior Image Dataset/texting_phone/img_34316.jpg,escribir_telefono,otros,0.9463,state_farm,sf_p012
+Multi-Class Driver Behavior Image Dataset/talking_phone/IMG_20240930_132636120_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/talking_phone/IMG_20240930_132636120_HDR_AE.jpg,hablar_telefono,otros,0.8804,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/other_activities/img_15164.jpg,Multi-Class Driver Behavior Image Dataset/other_activities/img_15164.jpg,otros,conduccion_segura,1.0,state_farm,sf_p012
+Multi-Class Driver Behavior Image Dataset/talking_phone/IMG_20240930_133643569_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/talking_phone/IMG_20240930_133643569_HDR_AE.jpg,hablar_telefono,otros,0.9934,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/turning/IMG_20240930_133901989_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/turning/IMG_20240930_133901989_HDR_AE.jpg,giro,conduccion_segura,0.9022,otra,ses_foto_IMG_fecha_HDR_s0

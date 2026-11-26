@@ -10,6 +10,8 @@ Uso (en Windows, `py` en lugar de `python`):
   py run.py entrenar [--set red.familia=cnn --set red.lr=0.003]   # una corrida (modificación en vivo)
   py run.py busqueda --set red.familia=transfer                   # búsqueda con presupuesto fijo
   py run.py semillas --set red.familia=transfer                   # 30 semillas de la mejor configuración
+  py run.py figuras                                               # figuras de comparación (sin reentrenar)
+  py run.py evaluacion                                            # Grad-CAM, alertas, por grupo, arquitecturas
 
 Opciones comunes:
   --config configs/m2.yaml       archivo de configuración
@@ -28,10 +30,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from m2.utils import entorno, load_config, resolve, set_seed  # noqa: E402
 
-PASOS = ["inventario", "duplicados", "particion", "preproceso", "baseline", "entrenar", "busqueda", "semillas"]
+PASOS = ["inventario", "duplicados", "particion", "preproceso", "baseline", "entrenar", "busqueda", "semillas", "figuras", "evaluacion"]
 COMPUESTOS = {"datos": ["inventario", "duplicados", "particion", "preproceso"]}
 # Pasos que viven dentro de otro módulo: paso -> (módulo, función)
-FUNCIONES = {"entrenar": ("redes", "entrenar"), "busqueda": ("redes", "busqueda"), "semillas": ("redes", "semillas")}
+FUNCIONES = {"entrenar": ("redes", "entrenar"), "busqueda": ("redes", "busqueda"), "semillas": ("redes", "semillas"),
+             "figuras": ("figuras_redes", "ejecutar")}
 
 
 def main(argv=None):

@@ -1,0 +1,194 @@
+{
+  "semilla": 0,
+  "config": {
+    "familia": "cnn",
+    "epocas_max": 30,
+    "paciencia": 6,
+    "batch_size": 64,
+    "optimizador": "sgd",
+    "lr": 0.03,
+    "momento": 0.9,
+    "weight_decay": 0.01,
+    "dropout": 0.4,
+    "precision_mixta": true,
+    "aumento": {
+      "rotacion": 5,
+      "brillo_contraste": 0.1,
+      "recorte_escala_min": 0.9,
+      "volteo_h": 0.0
+    },
+    "cnn": {
+      "bloques": 5,
+      "filtros_base": 16
+    },
+    "transfer": {
+      "epocas_cabeza": 2,
+      "bloques_descongelados": 4,
+      "factor_lr_base": 0.1
+    }
+  },
+  "parametros": {
+    "entrenables": 1181045,
+    "totales": 1181045
+  },
+  "validacion": {
+    "n": 1067,
+    "exactitud": 0.7441,
+    "f1_macro": 0.715,
+    "por_clase": {
+      "conduccion_segura": {
+        "precision": 0.7172,
+        "sensibilidad": 0.8189,
+        "f1": 0.7647,
+        "n": 254
+      },
+      "giro": {
+        "precision": 0.5808,
+        "sensibilidad": 0.9037,
+        "f1": 0.7071,
+        "n": 187
+      },
+      "escribir_telefono": {
+        "precision": 0.9524,
+        "sensibilidad": 0.8036,
+        "f1": 0.8717,
+        "n": 224
+      },
+      "hablar_telefono": {
+        "precision": 0.8274,
+        "sensibilidad": 0.806,
+        "f1": 0.8166,
+        "n": 232
+      },
+      "otros": {
+        "precision": 0.7042,
+        "sensibilidad": 0.2941,
+        "f1": 0.4149,
+        "n": 170
+      }
+    },
+    "matriz_confusion": [
+      [
+        208,
+        35,
+        4,
+        2,
+        5
+      ],
+      [
+        14,
+        169,
+        2,
+        1,
+        1
+      ],
+      [
+        12,
+        25,
+        180,
+        3,
+        4
+      ],
+      [
+        7,
+        26,
+        1,
+        187,
+        11
+      ],
+      [
+        49,
+        36,
+        2,
+        33,
+        50
+      ]
+    ]
+  },
+  "prueba": {
+    "n": 1133,
+    "exactitud": 0.767,
+    "f1_macro": 0.757,
+    "por_clase": {
+      "conduccion_segura": {
+        "precision": 0.6783,
+        "sensibilidad": 0.951,
+        "f1": 0.7918,
+        "n": 286
+      },
+      "giro": {
+        "precision": 0.6875,
+        "sensibilidad": 0.8302,
+        "f1": 0.7521,
+        "n": 212
+      },
+      "escribir_telefono": {
+        "precision": 0.9661,
+        "sensibilidad": 0.7277,
+        "f1": 0.8301,
+        "n": 235
+      },
+      "hablar_telefono": {
+        "precision": 0.9451,
+        "sensibilidad": 0.7143,
+        "f1": 0.8136,
+        "n": 217
+      },
+      "otros": {
+        "precision": 0.7037,
+        "sensibilidad": 0.5191,
+        "f1": 0.5975,
+        "n": 183
+      }
+    },
+    "matriz_confusion": [
+      [
+        272,
+        5,
+        2,
+        1,
+        6
+      ],
+      [
+        23,
+        176,
+        0,
+        0,
+        13
+      ],
+      [
+        24,
+        37,
+        171,
+        1,
+        2
+      ],
+      [
+        16,
+        26,
+        1,
+        155,
+        19
+      ],
+      [
+        66,
+        12,
+        3,
+        7,
+        95
+      ]
+    ]
+  },
+  "prueba_por_procedencia": {
+    "otra": {
+      "n": 136,
+      "exactitud": 0.2353,
+      "f1_macro": 0.1402
+    },
+    "state_farm": {
+      "n": 997,
+      "exactitud": 0.8395,
+      "f1_macro": 0.8245
+    }
+  }
+}

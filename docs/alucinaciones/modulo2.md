@@ -12,6 +12,7 @@ Cada hallazgo sigue los seis campos del enunciado: (1) prompt literal, (2) respu
 | H2-4 | 2026-11-25 | Datos del mundo real (características del conjunto) | Tamaño del .zip «corregido» por confusión de unidades GB/GiB | Baja |
 | H2-5 | 2026-11-25 | Código / Conceptos | Umbral de coseno sobre características no negativas: la mitad de los pares «parecidos» | Alta: habría unido el conjunto en un solo grupo, o guardado 900 MB de pares inútiles |
 | H2-6 | 2026-11-25 | Código / Conceptos | Umbral de pHash (Hamming ≤ 6) tomado como estándar, sin medirlo en estos datos | Media: decenas de miles de falsos duplicados, muchos entre clases distintas |
+| H2-10 | 2026-11-25 | Código | Figura de la búsqueda con las etiquetas de un panel sobrescritas por las del otro | Media: la figura habría atribuido a la CNN configuraciones de transfer |
 | H2-9 | 2026-11-25 | Código | Claves del espacio de búsqueda con «.», imposibles de cambiar con `--set` | Baja: incumplía «parámetros modificables desde la CLI» para la búsqueda |
 | H2-8 | 2026-11-25 | Código (fuga de información) | Agrupar las fotos de 2024 solo por similitud dejaba a la misma persona en dos particiones | Media: se detectó antes de entrenar |
 | H2-7 | 2026-11-25 | Datos del mundo real (características del conjunto) | «Giro es una maniobra legítima, sin alerta», sin verificar qué contiene la clase | Alta: la política de alertas no alertaría el 89 % de esa clase, que es una distracción |
@@ -183,6 +184,22 @@ La IA tomó como cierta la descripción del artículo («7.286 imágenes JPEG»)
 **5. Corrección.** Las claves anidadas del espacio se escriben con «/» (`cnn/bloques`), y `_set` traduce «/» a «.». Con eso, `--set busqueda.espacio.cnn.cnn/filtros_base=[8]` funciona.
 
 **6. Lección.** Cuando dos mecanismos usan el mismo separador (claves del YAML y rutas de la CLI), hay que probar los cambios desde la CLI sobre cada tipo de parámetro, no solo los de primer nivel.
+
+---
+
+## H2-10. Etiquetas cruzadas en la figura de la búsqueda
+
+**1. Prompt.** La Persona B pegó la salida de las 30 semillas de ambas familias; la IA generó las figuras de comparación.
+
+**2. Respuesta de la IA (parte relevante).** En `figuras_redes.py`, `fig_busqueda` creaba los dos paneles con `plt.subplots(1, 2, sharey=True)` y luego asignaba en cada panel sus propias etiquetas con `ax.set_yticks(t.index, etiquetas)`.
+
+**3. Sospecha.** Al revisar la figura generada con los datos reales, la etiqueta superior del panel de la CNN decía «#5 adamw 0.003», pero la configuración elegida para la CNN era la #10 (`mejor_config_cnn.yaml`).
+
+**4. Evidencia.** `busqueda_cnn.csv` da 0,7663 para la #10 y 0,7658 para la #5, así que la #10 va arriba. La etiqueta inferior del panel de la CNN («#1 adamw 0.0003») correspondía a la peor configuración de **transfer** (0,433), no a la de la CNN (#6, 0,183). Con `sharey=True` ambos ejes comparten las marcas y sus etiquetas, y la llamada del segundo panel sobrescribe las del primero. Los puntos estaban bien; los nombres no.
+
+**5. Corrección.** Se quitó `sharey=True`. En la figura regenerada, las etiquetas de cada panel coinciden con su CSV.
+
+**6. Lección.** Revisar cada figura contra los datos que la generan, en particular cuando se comparten ejes entre paneles con etiquetas distintas.
 
 ---
 

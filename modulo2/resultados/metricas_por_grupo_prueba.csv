@@ -1,0 +1,306 @@
+modelo,corrida,grupo,n,exactitud
+Referencia,0,ses_foto_IMG_fecha_HDR_s0,136,0.3014705882352941
+Referencia,0,sf_p012,267,0.7602996254681648
+Referencia,0,sf_p039,181,0.7845303867403315
+Referencia,0,sf_p051,304,0.9013157894736842
+Referencia,0,sf_p075,245,0.5673469387755102
+CNN desde cero,0,ses_foto_IMG_fecha_HDR_s0,136,0.23529411764705882
+CNN desde cero,0,sf_p012,267,0.9063670411985019
+CNN desde cero,0,sf_p039,181,0.9613259668508287
+CNN desde cero,0,sf_p051,304,0.9078947368421053
+CNN desde cero,0,sf_p075,245,0.5918367346938775
+CNN desde cero,1,ses_foto_IMG_fecha_HDR_s0,136,0.23529411764705882
+CNN desde cero,1,sf_p012,267,0.4943820224719101
+CNN desde cero,1,sf_p039,181,0.574585635359116
+CNN desde cero,1,sf_p051,304,0.6743421052631579
+CNN desde cero,1,sf_p075,245,0.40816326530612246
+CNN desde cero,2,ses_foto_IMG_fecha_HDR_s0,136,0.27941176470588236
+CNN desde cero,2,sf_p012,267,0.8426966292134831
+CNN desde cero,2,sf_p039,181,0.8674033149171271
+CNN desde cero,2,sf_p051,304,0.7730263157894737
+CNN desde cero,2,sf_p075,245,0.7551020408163265
+CNN desde cero,3,ses_foto_IMG_fecha_HDR_s0,136,0.22794117647058823
+CNN desde cero,3,sf_p012,267,0.7902621722846442
+CNN desde cero,3,sf_p039,181,0.7955801104972375
+CNN desde cero,3,sf_p051,304,0.881578947368421
+CNN desde cero,3,sf_p075,245,0.46122448979591835
+CNN desde cero,4,ses_foto_IMG_fecha_HDR_s0,136,0.3014705882352941
+CNN desde cero,4,sf_p012,267,0.8838951310861424
+CNN desde cero,4,sf_p039,181,0.9613259668508287
+CNN desde cero,4,sf_p051,304,0.8980263157894737
+CNN desde cero,4,sf_p075,245,0.7918367346938775
+CNN desde cero,5,ses_foto_IMG_fecha_HDR_s0,136,0.19852941176470587
+CNN desde cero,5,sf_p012,267,0.5880149812734082
+CNN desde cero,5,sf_p039,181,0.7458563535911602
+CNN desde cero,5,sf_p051,304,0.7598684210526315
+CNN desde cero,5,sf_p075,245,0.2530612244897959
+CNN desde cero,6,ses_foto_IMG_fecha_HDR_s0,136,0.25
+CNN desde cero,6,sf_p012,267,0.8426966292134831
+CNN desde cero,6,sf_p039,181,0.8784530386740331
+CNN desde cero,6,sf_p051,304,0.8651315789473685
+CNN desde cero,6,sf_p075,245,0.726530612244898
+CNN desde cero,7,ses_foto_IMG_fecha_HDR_s0,136,0.23529411764705882
+CNN desde cero,7,sf_p012,267,0.704119850187266
+CNN desde cero,7,sf_p039,181,0.6187845303867403
+CNN desde cero,7,sf_p051,304,0.8289473684210527
+CNN desde cero,7,sf_p075,245,0.563265306122449
+CNN desde cero,8,ses_foto_IMG_fecha_HDR_s0,136,0.22794117647058823
+CNN desde cero,8,sf_p012,267,0.700374531835206
+CNN desde cero,8,sf_p039,181,0.8950276243093923
+CNN desde cero,8,sf_p051,304,0.7171052631578947
+CNN desde cero,8,sf_p075,245,0.5959183673469388
+CNN desde cero,9,ses_foto_IMG_fecha_HDR_s0,136,0.27941176470588236
+CNN desde cero,9,sf_p012,267,0.8838951310861424
+CNN desde cero,9,sf_p039,181,0.7071823204419889
+CNN desde cero,9,sf_p051,304,0.5427631578947368
+CNN desde cero,9,sf_p075,245,0.6612244897959184
+CNN desde cero,10,ses_foto_IMG_fecha_HDR_s0,136,0.23529411764705882
+CNN desde cero,10,sf_p012,267,0.8389513108614233
+CNN desde cero,10,sf_p039,181,0.856353591160221
+CNN desde cero,10,sf_p051,304,0.8355263157894737
+CNN desde cero,10,sf_p075,245,0.6448979591836734
+CNN desde cero,11,ses_foto_IMG_fecha_HDR_s0,136,0.23529411764705882
+CNN desde cero,11,sf_p012,267,0.8089887640449438
+CNN desde cero,11,sf_p039,181,0.7900552486187845
+CNN desde cero,11,sf_p051,304,0.9046052631578947
+CNN desde cero,11,sf_p075,245,0.6857142857142857
+CNN desde cero,12,ses_foto_IMG_fecha_HDR_s0,136,0.25
+CNN desde cero,12,sf_p012,267,0.7902621722846442
+CNN desde cero,12,sf_p039,181,0.6961325966850829
+CNN desde cero,12,sf_p051,304,0.868421052631579
+CNN desde cero,12,sf_p075,245,0.46938775510204084
+CNN desde cero,13,ses_foto_IMG_fecha_HDR_s0,136,0.23529411764705882
+CNN desde cero,13,sf_p012,267,0.8314606741573034
+CNN desde cero,13,sf_p039,181,0.9337016574585635
+CNN desde cero,13,sf_p051,304,0.8486842105263158
+CNN desde cero,13,sf_p075,245,0.6979591836734694
+CNN desde cero,14,ses_foto_IMG_fecha_HDR_s0,136,0.22058823529411764
+CNN desde cero,14,sf_p012,267,0.5131086142322098
+CNN desde cero,14,sf_p039,181,0.6574585635359116
+CNN desde cero,14,sf_p051,304,0.805921052631579
+CNN desde cero,14,sf_p075,245,0.2938775510204082
+CNN desde cero,15,ses_foto_IMG_fecha_HDR_s0,136,0.16911764705882354
+CNN desde cero,15,sf_p012,267,0.8314606741573034
+CNN desde cero,15,sf_p039,181,0.8121546961325967
+CNN desde cero,15,sf_p051,304,0.805921052631579
+CNN desde cero,15,sf_p075,245,0.3183673469387755
+CNN desde cero,16,ses_foto_IMG_fecha_HDR_s0,136,0.19117647058823528
+CNN desde cero,16,sf_p012,267,0.7528089887640449
+CNN desde cero,16,sf_p039,181,0.850828729281768
+CNN desde cero,16,sf_p051,304,0.6875
+CNN desde cero,16,sf_p075,245,0.46122448979591835
+CNN desde cero,17,ses_foto_IMG_fecha_HDR_s0,136,0.3088235294117647
+CNN desde cero,17,sf_p012,267,0.9026217228464419
+CNN desde cero,17,sf_p039,181,0.9171270718232044
+CNN desde cero,17,sf_p051,304,0.8289473684210527
+CNN desde cero,17,sf_p075,245,0.6122448979591837
+CNN desde cero,18,ses_foto_IMG_fecha_HDR_s0,136,0.25
+CNN desde cero,18,sf_p012,267,0.8876404494382022
+CNN desde cero,18,sf_p039,181,0.9005524861878453
+CNN desde cero,18,sf_p051,304,0.8552631578947368
+CNN desde cero,18,sf_p075,245,0.6
+CNN desde cero,19,ses_foto_IMG_fecha_HDR_s0,136,0.27941176470588236
+CNN desde cero,19,sf_p012,267,0.8239700374531835
+CNN desde cero,19,sf_p039,181,0.8839779005524862
+CNN desde cero,19,sf_p051,304,0.8782894736842105
+CNN desde cero,19,sf_p075,245,0.636734693877551
+CNN desde cero,20,ses_foto_IMG_fecha_HDR_s0,136,0.16911764705882354
+CNN desde cero,20,sf_p012,267,0.7078651685393258
+CNN desde cero,20,sf_p039,181,0.7458563535911602
+CNN desde cero,20,sf_p051,304,0.4934210526315789
+CNN desde cero,20,sf_p075,245,0.19591836734693877
+CNN desde cero,21,ses_foto_IMG_fecha_HDR_s0,136,0.29411764705882354
+CNN desde cero,21,sf_p012,267,0.651685393258427
+CNN desde cero,21,sf_p039,181,0.6353591160220995
+CNN desde cero,21,sf_p051,304,0.5098684210526315
+CNN desde cero,21,sf_p075,245,0.3877551020408163
+CNN desde cero,22,ses_foto_IMG_fecha_HDR_s0,136,0.29411764705882354
+CNN desde cero,22,sf_p012,267,0.5318352059925093
+CNN desde cero,22,sf_p039,181,0.850828729281768
+CNN desde cero,22,sf_p051,304,0.7828947368421053
+CNN desde cero,22,sf_p075,245,0.37551020408163266
+CNN desde cero,23,ses_foto_IMG_fecha_HDR_s0,136,0.2647058823529412
+CNN desde cero,23,sf_p012,267,0.8764044943820225
+CNN desde cero,23,sf_p039,181,0.8342541436464088
+CNN desde cero,23,sf_p051,304,0.6907894736842105
+CNN desde cero,23,sf_p075,245,0.8612244897959184
+CNN desde cero,24,ses_foto_IMG_fecha_HDR_s0,136,0.2426470588235294
+CNN desde cero,24,sf_p012,267,0.8052434456928839
+CNN desde cero,24,sf_p039,181,0.7790055248618785
+CNN desde cero,24,sf_p051,304,0.9539473684210527
+CNN desde cero,24,sf_p075,245,0.6530612244897959
+CNN desde cero,25,ses_foto_IMG_fecha_HDR_s0,136,0.20588235294117646
+CNN desde cero,25,sf_p012,267,0.700374531835206
+CNN desde cero,25,sf_p039,181,0.7734806629834254
+CNN desde cero,25,sf_p051,304,0.7730263157894737
+CNN desde cero,25,sf_p075,245,0.5102040816326531
+CNN desde cero,26,ses_foto_IMG_fecha_HDR_s0,136,0.29411764705882354
+CNN desde cero,26,sf_p012,267,0.850187265917603
+CNN desde cero,26,sf_p039,181,0.7790055248618785
+CNN desde cero,26,sf_p051,304,0.819078947368421
+CNN desde cero,26,sf_p075,245,0.5265306122448979
+CNN desde cero,27,ses_foto_IMG_fecha_HDR_s0,136,0.2867647058823529
+CNN desde cero,27,sf_p012,267,0.8352059925093633
+CNN desde cero,27,sf_p039,181,0.7955801104972375
+CNN desde cero,27,sf_p051,304,0.8848684210526315
+CNN desde cero,27,sf_p075,245,0.22448979591836735
+CNN desde cero,28,ses_foto_IMG_fecha_HDR_s0,136,0.25735294117647056
+CNN desde cero,28,sf_p012,267,0.8314606741573034
+CNN desde cero,28,sf_p039,181,0.6574585635359116
+CNN desde cero,28,sf_p051,304,0.875
+CNN desde cero,28,sf_p075,245,0.6530612244897959
+CNN desde cero,29,ses_foto_IMG_fecha_HDR_s0,136,0.2426470588235294
+CNN desde cero,29,sf_p012,267,0.7640449438202247
+CNN desde cero,29,sf_p039,181,0.7348066298342542
+CNN desde cero,29,sf_p051,304,0.9111842105263158
+CNN desde cero,29,sf_p075,245,0.6530612244897959
+Transfer learning,0,ses_foto_IMG_fecha_HDR_s0,136,0.2647058823529412
+Transfer learning,0,sf_p012,267,0.850187265917603
+Transfer learning,0,sf_p039,181,0.9779005524861878
+Transfer learning,0,sf_p051,304,0.9572368421052632
+Transfer learning,0,sf_p075,245,0.8734693877551021
+Transfer learning,1,ses_foto_IMG_fecha_HDR_s0,136,0.3382352941176471
+Transfer learning,1,sf_p012,267,0.8876404494382022
+Transfer learning,1,sf_p039,181,0.9613259668508287
+Transfer learning,1,sf_p051,304,0.9703947368421053
+Transfer learning,1,sf_p075,245,0.9346938775510204
+Transfer learning,2,ses_foto_IMG_fecha_HDR_s0,136,0.4117647058823529
+Transfer learning,2,sf_p012,267,0.8651685393258427
+Transfer learning,2,sf_p039,181,0.9116022099447514
+Transfer learning,2,sf_p051,304,0.9506578947368421
+Transfer learning,2,sf_p075,245,0.9224489795918367
+Transfer learning,3,ses_foto_IMG_fecha_HDR_s0,136,0.375
+Transfer learning,3,sf_p012,267,0.9288389513108615
+Transfer learning,3,sf_p039,181,0.9723756906077348
+Transfer learning,3,sf_p051,304,0.9473684210526315
+Transfer learning,3,sf_p075,245,0.8816326530612245
+Transfer learning,4,ses_foto_IMG_fecha_HDR_s0,136,0.39705882352941174
+Transfer learning,4,sf_p012,267,0.898876404494382
+Transfer learning,4,sf_p039,181,0.9668508287292817
+Transfer learning,4,sf_p051,304,0.9671052631578947
+Transfer learning,4,sf_p075,245,0.9306122448979591
+Transfer learning,5,ses_foto_IMG_fecha_HDR_s0,136,0.3382352941176471
+Transfer learning,5,sf_p012,267,0.8801498127340824
+Transfer learning,5,sf_p039,181,0.9668508287292817
+Transfer learning,5,sf_p051,304,0.9638157894736842
+Transfer learning,5,sf_p075,245,0.8653061224489796
+Transfer learning,6,ses_foto_IMG_fecha_HDR_s0,136,0.35294117647058826
+Transfer learning,6,sf_p012,267,0.9176029962546817
+Transfer learning,6,sf_p039,181,0.9392265193370166
+Transfer learning,6,sf_p051,304,0.9736842105263158
+Transfer learning,6,sf_p075,245,0.8775510204081632
+Transfer learning,7,ses_foto_IMG_fecha_HDR_s0,136,0.36764705882352944
+Transfer learning,7,sf_p012,267,0.9213483146067416
+Transfer learning,7,sf_p039,181,0.9337016574585635
+Transfer learning,7,sf_p051,304,0.7335526315789473
+Transfer learning,7,sf_p075,245,0.7142857142857143
+Transfer learning,8,ses_foto_IMG_fecha_HDR_s0,136,0.41911764705882354
+Transfer learning,8,sf_p012,267,0.846441947565543
+Transfer learning,8,sf_p039,181,0.9502762430939227
+Transfer learning,8,sf_p051,304,0.9769736842105263
+Transfer learning,8,sf_p075,245,0.9142857142857143
+Transfer learning,9,ses_foto_IMG_fecha_HDR_s0,136,0.35294117647058826
+Transfer learning,9,sf_p012,267,0.9325842696629213
+Transfer learning,9,sf_p039,181,0.9613259668508287
+Transfer learning,9,sf_p051,304,0.9736842105263158
+Transfer learning,9,sf_p075,245,0.9387755102040817
+Transfer learning,10,ses_foto_IMG_fecha_HDR_s0,136,0.4485294117647059
+Transfer learning,10,sf_p012,267,0.9213483146067416
+Transfer learning,10,sf_p039,181,0.7955801104972375
+Transfer learning,10,sf_p051,304,0.9638157894736842
+Transfer learning,10,sf_p075,245,0.8571428571428571
+Transfer learning,11,ses_foto_IMG_fecha_HDR_s0,136,0.5220588235294118
+Transfer learning,11,sf_p012,267,0.9063670411985019
+Transfer learning,11,sf_p039,181,0.9502762430939227
+Transfer learning,11,sf_p051,304,0.9407894736842105
+Transfer learning,11,sf_p075,245,0.889795918367347
+Transfer learning,12,ses_foto_IMG_fecha_HDR_s0,136,0.4117647058823529
+Transfer learning,12,sf_p012,267,0.9026217228464419
+Transfer learning,12,sf_p039,181,0.9171270718232044
+Transfer learning,12,sf_p051,304,0.9506578947368421
+Transfer learning,12,sf_p075,245,0.9020408163265307
+Transfer learning,13,ses_foto_IMG_fecha_HDR_s0,136,0.4338235294117647
+Transfer learning,13,sf_p012,267,0.8389513108614233
+Transfer learning,13,sf_p039,181,0.9558011049723757
+Transfer learning,13,sf_p051,304,0.9769736842105263
+Transfer learning,13,sf_p075,245,0.9142857142857143
+Transfer learning,14,ses_foto_IMG_fecha_HDR_s0,136,0.4264705882352941
+Transfer learning,14,sf_p012,267,0.9213483146067416
+Transfer learning,14,sf_p039,181,0.994475138121547
+Transfer learning,14,sf_p051,304,0.930921052631579
+Transfer learning,14,sf_p075,245,0.8530612244897959
+Transfer learning,15,ses_foto_IMG_fecha_HDR_s0,136,0.47058823529411764
+Transfer learning,15,sf_p012,267,0.8352059925093633
+Transfer learning,15,sf_p039,181,0.9558011049723757
+Transfer learning,15,sf_p051,304,0.9638157894736842
+Transfer learning,15,sf_p075,245,0.9387755102040817
+Transfer learning,16,ses_foto_IMG_fecha_HDR_s0,136,0.375
+Transfer learning,16,sf_p012,267,0.9176029962546817
+Transfer learning,16,sf_p039,181,0.9723756906077348
+Transfer learning,16,sf_p051,304,0.9638157894736842
+Transfer learning,16,sf_p075,245,0.9020408163265307
+Transfer learning,17,ses_foto_IMG_fecha_HDR_s0,136,0.45588235294117646
+Transfer learning,17,sf_p012,267,0.8614232209737828
+Transfer learning,17,sf_p039,181,0.9613259668508287
+Transfer learning,17,sf_p051,304,0.9703947368421053
+Transfer learning,17,sf_p075,245,0.9183673469387755
+Transfer learning,18,ses_foto_IMG_fecha_HDR_s0,136,0.36764705882352944
+Transfer learning,18,sf_p012,267,0.9176029962546817
+Transfer learning,18,sf_p039,181,0.9005524861878453
+Transfer learning,18,sf_p051,304,0.9506578947368421
+Transfer learning,18,sf_p075,245,0.8938775510204081
+Transfer learning,19,ses_foto_IMG_fecha_HDR_s0,136,0.40441176470588236
+Transfer learning,19,sf_p012,267,0.8838951310861424
+Transfer learning,19,sf_p039,181,0.9558011049723757
+Transfer learning,19,sf_p051,304,0.9638157894736842
+Transfer learning,19,sf_p075,245,0.8448979591836735
+Transfer learning,20,ses_foto_IMG_fecha_HDR_s0,136,0.4485294117647059
+Transfer learning,20,sf_p012,267,0.898876404494382
+Transfer learning,20,sf_p039,181,0.9502762430939227
+Transfer learning,20,sf_p051,304,0.9407894736842105
+Transfer learning,20,sf_p075,245,0.9142857142857143
+Transfer learning,21,ses_foto_IMG_fecha_HDR_s0,136,0.3235294117647059
+Transfer learning,21,sf_p012,267,0.8202247191011236
+Transfer learning,21,sf_p039,181,0.8784530386740331
+Transfer learning,21,sf_p051,304,0.8947368421052632
+Transfer learning,21,sf_p075,245,0.8571428571428571
+Transfer learning,22,ses_foto_IMG_fecha_HDR_s0,136,0.375
+Transfer learning,22,sf_p012,267,0.9138576779026217
+Transfer learning,22,sf_p039,181,0.9613259668508287
+Transfer learning,22,sf_p051,304,0.9375
+Transfer learning,22,sf_p075,245,0.8693877551020408
+Transfer learning,23,ses_foto_IMG_fecha_HDR_s0,136,0.3897058823529412
+Transfer learning,23,sf_p012,267,0.9250936329588015
+Transfer learning,23,sf_p039,181,0.988950276243094
+Transfer learning,23,sf_p051,304,0.9835526315789473
+Transfer learning,23,sf_p075,245,0.8979591836734694
+Transfer learning,24,ses_foto_IMG_fecha_HDR_s0,136,0.39705882352941174
+Transfer learning,24,sf_p012,267,0.8202247191011236
+Transfer learning,24,sf_p039,181,0.9337016574585635
+Transfer learning,24,sf_p051,304,0.9572368421052632
+Transfer learning,24,sf_p075,245,0.9224489795918367
+Transfer learning,25,ses_foto_IMG_fecha_HDR_s0,136,0.41911764705882354
+Transfer learning,25,sf_p012,267,0.9026217228464419
+Transfer learning,25,sf_p039,181,0.9502762430939227
+Transfer learning,25,sf_p051,304,0.9736842105263158
+Transfer learning,25,sf_p075,245,0.8448979591836735
+Transfer learning,26,ses_foto_IMG_fecha_HDR_s0,136,0.3602941176470588
+Transfer learning,26,sf_p012,267,0.846441947565543
+Transfer learning,26,sf_p039,181,0.8839779005524862
+Transfer learning,26,sf_p051,304,0.930921052631579
+Transfer learning,26,sf_p075,245,0.9061224489795918
+Transfer learning,27,ses_foto_IMG_fecha_HDR_s0,136,0.34558823529411764
+Transfer learning,27,sf_p012,267,0.8539325842696629
+Transfer learning,27,sf_p039,181,0.9613259668508287
+Transfer learning,27,sf_p051,304,0.9539473684210527
+Transfer learning,27,sf_p075,245,0.8857142857142857
+Transfer learning,28,ses_foto_IMG_fecha_HDR_s0,136,0.4338235294117647
+Transfer learning,28,sf_p012,267,0.8838951310861424
+Transfer learning,28,sf_p039,181,0.9281767955801105
+Transfer learning,28,sf_p051,304,0.9638157894736842
+Transfer learning,28,sf_p075,245,0.9551020408163265
+Transfer learning,29,ses_foto_IMG_fecha_HDR_s0,136,0.4264705882352941
+Transfer learning,29,sf_p012,267,0.9063670411985019
+Transfer learning,29,sf_p039,181,0.9558011049723757
+Transfer learning,29,sf_p051,304,0.9572368421052632
+Transfer learning,29,sf_p075,245,0.889795918367347

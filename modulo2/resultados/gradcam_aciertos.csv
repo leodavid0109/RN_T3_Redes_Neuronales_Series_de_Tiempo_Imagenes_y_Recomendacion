@@ -1,0 +1,11 @@
+ruta,ruta_proc,clase,prediccion,confianza,procedencia,grupo
+Multi-Class Driver Behavior Image Dataset/safe_driving/img_31623.jpg,Multi-Class Driver Behavior Image Dataset/safe_driving/img_31623.jpg,conduccion_segura,conduccion_segura,1.0,state_farm,sf_p012
+Multi-Class Driver Behavior Image Dataset/turning/img_84555.jpg,Multi-Class Driver Behavior Image Dataset/turning/img_84555.jpg,giro,giro,0.9999,state_farm,sf_p012
+Multi-Class Driver Behavior Image Dataset/texting_phone/img_35339.jpg,Multi-Class Driver Behavior Image Dataset/texting_phone/img_35339.jpg,escribir_telefono,escribir_telefono,1.0,state_farm,sf_p075
+Multi-Class Driver Behavior Image Dataset/talking_phone/img_30419.jpg,Multi-Class Driver Behavior Image Dataset/talking_phone/img_30419.jpg,hablar_telefono,hablar_telefono,1.0,state_farm,sf_p051
+Multi-Class Driver Behavior Image Dataset/other_activities/img_18740.jpg,Multi-Class Driver Behavior Image Dataset/other_activities/img_18740.jpg,otros,otros,0.9996,state_farm,sf_p075
+Multi-Class Driver Behavior Image Dataset/turning/img_53754.jpg,Multi-Class Driver Behavior Image Dataset/turning/img_53754.jpg,giro,giro,1.0,state_farm,sf_p051
+Multi-Class Driver Behavior Image Dataset/other_activities/IMG_20240930_133203647_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/other_activities/IMG_20240930_133203647_HDR_AE.jpg,otros,otros,0.95,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/other_activities/IMG_20240930_133500710_HDR_AE.jpg,Multi-Class Driver Behavior Image Dataset/other_activities/IMG_20240930_133500710_HDR_AE.jpg,otros,otros,0.9438,otra,ses_foto_IMG_fecha_HDR_s0
+Multi-Class Driver Behavior Image Dataset/safe_driving/img_36018.jpg,Multi-Class Driver Behavior Image Dataset/safe_driving/img_36018.jpg,conduccion_segura,conduccion_segura,0.9943,state_farm,sf_p051
+Multi-Class Driver Behavior Image Dataset/texting_phone/img_29859.jpg,Multi-Class Driver Behavior Image Dataset/texting_phone/img_29859.jpg,escribir_telefono,escribir_telefono,0.9845,state_farm,sf_p012

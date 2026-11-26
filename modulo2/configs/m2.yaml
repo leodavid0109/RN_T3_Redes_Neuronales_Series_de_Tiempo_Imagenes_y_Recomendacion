@@ -128,6 +128,14 @@ semillas:
   n: 30
   verbose: false
 
+evaluacion:
+  familia: transfer          # modelo final que se interpreta y sobre el que se define la alerta
+
+alertas:
+  # Alerta = 1 - P(conducción segura). «Giro» dispara alerta (registro, sección 10).
+  prevalencia_supuesta: 0.10 # fracción de imágenes con distracción supuesta en operación real
+  cocientes_costo: [1, 5, 10, 20]   # costo de una distracción no detectada / costo de una falsa alarma
+
 salidas:
   figuras: figuras
   resultados: resultados

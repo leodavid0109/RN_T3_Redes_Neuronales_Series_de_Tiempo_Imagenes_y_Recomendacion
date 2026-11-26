@@ -1,0 +1,336 @@
+{
+  "alertas": {
+    "prevalencias": {
+      "conjunto_prueba": 0.7475728155339806,
+      "supuesta": 0.1
+    },
+    "elegidos": {
+      "conjunto_prueba_costo1": {
+        "prevalencia": 0.7476,
+        "cociente_costo_FN_FP": 1,
+        "umbral_elegido_en_validacion": 0.82,
+        "prueba_falsas_alarmas_x1000": 23.8,
+        "prueba_no_detectadas_x1000": 70.6,
+        "prueba_tasa_falsa_alarma": 0.0944,
+        "prueba_tasa_no_deteccion": 0.0945
+      },
+      "conjunto_prueba_costo5": {
+        "prevalencia": 0.7476,
+        "cociente_costo_FN_FP": 5,
+        "umbral_elegido_en_validacion": 0.12,
+        "prueba_falsas_alarmas_x1000": 56.5,
+        "prueba_no_detectadas_x1000": 22.1,
+        "prueba_tasa_falsa_alarma": 0.2238,
+        "prueba_tasa_no_deteccion": 0.0295
+      },
+      "conjunto_prueba_costo10": {
+        "prevalencia": 0.7476,
+        "cociente_costo_FN_FP": 10,
+        "umbral_elegido_en_validacion": 0.08,
+        "prueba_falsas_alarmas_x1000": 60.0,
+        "prueba_no_detectadas_x1000": 18.5,
+        "prueba_tasa_falsa_alarma": 0.2378,
+        "prueba_tasa_no_deteccion": 0.0248
+      },
+      "conjunto_prueba_costo20": {
+        "prevalencia": 0.7476,
+        "cociente_costo_FN_FP": 20,
+        "umbral_elegido_en_validacion": 0.08,
+        "prueba_falsas_alarmas_x1000": 60.0,
+        "prueba_no_detectadas_x1000": 18.5,
+        "prueba_tasa_falsa_alarma": 0.2378,
+        "prueba_tasa_no_deteccion": 0.0248
+      },
+      "supuesta_costo1": {
+        "prevalencia": 0.1,
+        "cociente_costo_FN_FP": 1,
+        "umbral_elegido_en_validacion": 0.98,
+        "prueba_falsas_alarmas_x1000": 22.0,
+        "prueba_no_detectadas_x1000": 18.3,
+        "prueba_tasa_falsa_alarma": 0.0245,
+        "prueba_tasa_no_deteccion": 0.183
+      },
+      "supuesta_costo5": {
+        "prevalencia": 0.1,
+        "cociente_costo_FN_FP": 5,
+        "umbral_elegido_en_validacion": 0.98,
+        "prueba_falsas_alarmas_x1000": 22.0,
+        "prueba_no_detectadas_x1000": 18.3,
+        "prueba_tasa_falsa_alarma": 0.0245,
+        "prueba_tasa_no_deteccion": 0.183
+      },
+      "supuesta_costo10": {
+        "prevalencia": 0.1,
+        "cociente_costo_FN_FP": 10,
+        "umbral_elegido_en_validacion": 0.98,
+        "prueba_falsas_alarmas_x1000": 22.0,
+        "prueba_no_detectadas_x1000": 18.3,
+        "prueba_tasa_falsa_alarma": 0.0245,
+        "prueba_tasa_no_deteccion": 0.183
+      },
+      "supuesta_costo20": {
+        "prevalencia": 0.1,
+        "cociente_costo_FN_FP": 20,
+        "umbral_elegido_en_validacion": 0.82,
+        "prueba_falsas_alarmas_x1000": 85.0,
+        "prueba_no_detectadas_x1000": 9.4,
+        "prueba_tasa_falsa_alarma": 0.0944,
+        "prueba_tasa_no_deteccion": 0.0945
+      }
+    }
+  },
+  "por_grupo": [
+    {
+      "modelo": "CNN desde cero",
+      "grupo": "ses_foto_IMG_fecha_HDR_s0",
+      "mean": 0.2466,
+      "std": 0.0372,
+      "min": 0.1691,
+      "max": 0.3088
+    },
+    {
+      "modelo": "CNN desde cero",
+      "grupo": "sf_p012",
+      "mean": 0.7724,
+      "std": 0.1167,
+      "min": 0.4944,
+      "max": 0.9064
+    },
+    {
+      "modelo": "CNN desde cero",
+      "grupo": "sf_p039",
+      "mean": 0.7963,
+      "std": 0.1038,
+      "min": 0.5746,
+      "max": 0.9613
+    },
+    {
+      "modelo": "CNN desde cero",
+      "grupo": "sf_p051",
+      "mean": 0.7954,
+      "std": 0.1183,
+      "min": 0.4934,
+      "max": 0.9539
+    },
+    {
+      "modelo": "CNN desde cero",
+      "grupo": "sf_p075",
+      "mean": 0.5423,
+      "std": 0.174,
+      "min": 0.1959,
+      "max": 0.8612
+    },
+    {
+      "modelo": "Referencia",
+      "grupo": "ses_foto_IMG_fecha_HDR_s0",
+      "mean": 0.3015,
+      "std": NaN,
+      "min": 0.3015,
+      "max": 0.3015
+    },
+    {
+      "modelo": "Referencia",
+      "grupo": "sf_p012",
+      "mean": 0.7603,
+      "std": NaN,
+      "min": 0.7603,
+      "max": 0.7603
+    },
+    {
+      "modelo": "Referencia",
+      "grupo": "sf_p039",
+      "mean": 0.7845,
+      "std": NaN,
+      "min": 0.7845,
+      "max": 0.7845
+    },
+    {
+      "modelo": "Referencia",
+      "grupo": "sf_p051",
+      "mean": 0.9013,
+      "std": NaN,
+      "min": 0.9013,
+      "max": 0.9013
+    },
+    {
+      "modelo": "Referencia",
+      "grupo": "sf_p075",
+      "mean": 0.5673,
+      "std": NaN,
+      "min": 0.5673,
+      "max": 0.5673
+    },
+    {
+      "modelo": "Transfer learning",
+      "grupo": "ses_foto_IMG_fecha_HDR_s0",
+      "mean": 0.3951,
+      "std": 0.0514,
+      "min": 0.2647,
+      "max": 0.5221
+    },
+    {
+      "modelo": "Transfer learning",
+      "grupo": "sf_p012",
+      "mean": 0.8869,
+      "std": 0.0346,
+      "min": 0.8202,
+      "max": 0.9326
+    },
+    {
+      "modelo": "Transfer learning",
+      "grupo": "sf_p039",
+      "mean": 0.9431,
+      "std": 0.0392,
+      "min": 0.7956,
+      "max": 0.9945
+    },
+    {
+      "modelo": "Transfer learning",
+      "grupo": "sf_p051",
+      "mean": 0.9495,
+      "std": 0.0446,
+      "min": 0.7336,
+      "max": 0.9836
+    },
+    {
+      "modelo": "Transfer learning",
+      "grupo": "sf_p075",
+      "mean": 0.8903,
+      "std": 0.0447,
+      "min": 0.7143,
+      "max": 0.9551
+    }
+  ],
+  "arquitecturas": {
+    "cnn": [
+      {
+        "capa": "bloque 1",
+        "tipo": "[Conv3x3-BN-ReLU]x2 + MaxPool",
+        "salida": "16x112x112",
+        "parametros": 2800
+      },
+      {
+        "capa": "bloque 2",
+        "tipo": "[Conv3x3-BN-ReLU]x2 + MaxPool",
+        "salida": "32x56x56",
+        "parametros": 13952
+      },
+      {
+        "capa": "bloque 3",
+        "tipo": "[Conv3x3-BN-ReLU]x2 + MaxPool",
+        "salida": "64x28x28",
+        "parametros": 55552
+      },
+      {
+        "capa": "bloque 4",
+        "tipo": "[Conv3x3-BN-ReLU]x2 + MaxPool",
+        "salida": "128x14x14",
+        "parametros": 221696
+      },
+      {
+        "capa": "bloque 5",
+        "tipo": "[Conv3x3-BN-ReLU]x2 + MaxPool",
+        "salida": "256x7x7",
+        "parametros": 885760
+      },
+      {
+        "capa": "pool",
+        "tipo": "AdaptiveAvgPool2d",
+        "salida": "256x1x1",
+        "parametros": 0
+      },
+      {
+        "capa": "classifier[0]",
+        "tipo": "Flatten",
+        "salida": "256",
+        "parametros": 0
+      },
+      {
+        "capa": "classifier[1]",
+        "tipo": "Dropout",
+        "salida": "256",
+        "parametros": 0
+      },
+      {
+        "capa": "classifier[2]",
+        "tipo": "Linear",
+        "salida": "5",
+        "parametros": 1285
+      }
+    ],
+    "transfer": [
+      {
+        "capa": "features[0]",
+        "tipo": "Conv-BN-SiLU",
+        "salida": "32x112x112",
+        "parametros": 928
+      },
+      {
+        "capa": "features[1]",
+        "tipo": "MBConv x1",
+        "salida": "16x112x112",
+        "parametros": 1448
+      },
+      {
+        "capa": "features[2]",
+        "tipo": "MBConv x2",
+        "salida": "24x56x56",
+        "parametros": 16714
+      },
+      {
+        "capa": "features[3]",
+        "tipo": "MBConv x2",
+        "salida": "40x28x28",
+        "parametros": 46640
+      },
+      {
+        "capa": "features[4]",
+        "tipo": "MBConv x3",
+        "salida": "80x14x14",
+        "parametros": 242930
+      },
+      {
+        "capa": "features[5]",
+        "tipo": "MBConv x3",
+        "salida": "112x14x14",
+        "parametros": 543148
+      },
+      {
+        "capa": "features[6]",
+        "tipo": "MBConv x4",
+        "salida": "192x7x7",
+        "parametros": 2026348
+      },
+      {
+        "capa": "features[7]",
+        "tipo": "MBConv x1",
+        "salida": "320x7x7",
+        "parametros": 717232
+      },
+      {
+        "capa": "features[8]",
+        "tipo": "Conv-BN-SiLU",
+        "salida": "1280x7x7",
+        "parametros": 412160
+      },
+      {
+        "capa": "avgpool",
+        "tipo": "AdaptiveAvgPool2d",
+        "salida": "1280x1x1",
+        "parametros": 0
+      },
+      {
+        "capa": "classifier[0]",
+        "tipo": "Dropout",
+        "salida": "1280",
+        "parametros": 0
+      },
+      {
+        "capa": "classifier[1]",
+        "tipo": "Linear",
+        "salida": "5",
+        "parametros": 6405
+      }
+    ]
+  }
+}

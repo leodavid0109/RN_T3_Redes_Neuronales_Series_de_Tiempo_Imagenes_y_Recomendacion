@@ -1,0 +1,4 @@
+modelo,clave,variabilidad,f1_prueba_media,f1_prueba_desv,f1_prueba_min,f1_prueba_max,f1_validacion_media,f1_prueba_state_farm,f1_prueba_otra,parametros_entrenables,configuraciones_busqueda,minutos_busqueda,minutos_30_semillas
+Referencia: logística sobre EfficientNet-B0 congelada,baseline,bootstrap de prueba (1.000),0.6968,0.013,0.6526,0.7445,0.5713,0.7468,0.237,6405,11,0.4,
+CNN desde cero,cnn,30 semillas,0.6559,0.102,0.4192,0.8126,0.6899,0.7033,0.1375,1181045,16,33.6,65.8
+Transfer learning (EfficientNet-B0),transfer,30 semillas,0.8548,0.0214,0.7775,0.8786,0.8292,0.9125,0.3873,3705293,16,31.8,70.5
